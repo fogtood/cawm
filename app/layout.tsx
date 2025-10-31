@@ -1,12 +1,24 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
 import './globals.css'
+import Navbar from '@/components/layout/navbar'
+import Footer from '@/components/layout/footer'
 
 const clashDisplay = localFont({
   src: [
     {
       path: '../public/fonts/ClashDisplay-Regular.otf',
       weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/ClashDisplay-Medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../public/fonts/ClashDisplay-Semibold.otf',
+      weight: '600',
       style: 'normal',
     },
     {
@@ -30,7 +42,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${clashDisplay.className} font-sans antialiased`}>{children}</body>
+      <body className={`${clashDisplay.className} font-sans antialiased`}>
+        <div className="flex min-h-screen flex-col">
+          <Navbar />
+          <section className="flex-1">{children}</section>
+          <Footer />
+        </div>
+      </body>
     </html>
   )
 }
