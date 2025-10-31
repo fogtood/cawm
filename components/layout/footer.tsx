@@ -71,23 +71,23 @@ const Footer = () => {
         <div className="mt-10 flex flex-wrap items-center justify-between gap-5 border-t border-[#5757564D] py-5">
           <p className="text-sm">© 2025 Christ Apostolic World Ministry. All rights reserved.</p>
           <div className="flex items-center gap-3">
-            <Button size="icon-lg" className="cursor-pointer rounded-xs bg-[#57575633] p-1.5">
-              <Image src="/images/instagram.svg" alt="Instagram" height={22} width={22} />
+            <Button size="icon" className="cursor-pointer rounded-xs bg-[#57575633] p-1.5">
+              <Image src="/images/instagram.svg" alt="Instagram" height={18} width={18} />
             </Button>
-            <Button size="icon-lg" className="cursor-pointer rounded-xs bg-[#57575633] p-1.5">
-              <Image src="/images/yt.svg" alt="YouTube" height={22} width={22} />
+            <Button size="icon" className="cursor-pointer rounded-xs bg-[#57575633] p-1.5">
+              <Image src="/images/yt.svg" alt="YouTube" height={18} width={18} />
             </Button>
-            <Button size="icon-lg" className="cursor-pointer rounded-xs bg-[#57575633] p-1.5">
-              <Image src="/images/x.svg" alt="X" height={22} width={22} />
+            <Button size="icon" className="cursor-pointer rounded-xs bg-[#57575633] p-1.5">
+              <Image src="/images/x.svg" alt="X" height={18} width={18} />
             </Button>
-            <Button size="icon-lg" className="cursor-pointer rounded-xs bg-[#57575633] p-1.5">
-              <Image src="/images/tiktok.svg" alt="TikTok" height={22} width={22} />
+            <Button size="icon" className="cursor-pointer rounded-xs bg-[#57575633] p-1.5">
+              <Image src="/images/tiktok.svg" alt="TikTok" height={18} width={18} />
             </Button>
-            <Button size="icon-lg" className="cursor-pointer rounded-xs bg-[#57575633] p-1.5">
-              <Image src="/images/spotify.svg" alt="Spotify" height={22} width={22} />
+            <Button size="icon" className="cursor-pointer rounded-xs bg-[#57575633] p-1.5">
+              <Image src="/images/spotify.svg" alt="Spotify" height={18} width={18} />
             </Button>
-            <Button size="icon-lg" className="cursor-pointer rounded-xs bg-[#57575633] p-1.5">
-              <Image src="/images/facebook.svg" alt="Facebook" height={22} width={22} />
+            <Button size="icon" className="cursor-pointer rounded-xs bg-[#57575633] p-1.5">
+              <Image src="/images/facebook.svg" alt="Facebook" height={18} width={18} />
             </Button>
           </div>
         </div>
