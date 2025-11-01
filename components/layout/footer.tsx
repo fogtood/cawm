@@ -60,7 +60,7 @@ const Footer = () => {
               <Input
                 type="email"
                 placeholder="Enter your email"
-                className="mb-4 h-auto w-full rounded-sm border-[#DADADA4D]! bg-[#57575633] px-2.5 py-3.5 ring-0!"
+                className="mb-4 h-auto w-full max-w-sm rounded-sm border-[#DADADA4D]! bg-[#57575633] px-2.5 py-3.5 ring-0!"
               />
               <Button className="h-auto w-full cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-3 text-base font-normal">
                 Subscribe
