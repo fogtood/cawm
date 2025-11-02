@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const SermonCard = () => {
   return (
-    <div className="max-w-sm cursor-pointer rounded-md shadow-md blur-out-md">
+    <div className="w-full max-w-[400px] cursor-pointer rounded-md shadow-md blur-out-md">
       <Image
         src="/images/sermon.png"
         alt="Sermon"

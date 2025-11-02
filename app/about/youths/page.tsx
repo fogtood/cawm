@@ -1,4 +1,5 @@
 import Bg from '@/components/common/bg'
+import GallerySection from '@/components/common/gallery-section'
 import Image from 'next/image'
 
 export default function AboutYouths() {
@@ -46,7 +47,7 @@ export default function AboutYouths() {
             imperdiet cursus. Pellentesque elementum risus id blandit morbi elit praesent.
           </p>
 
-          <div className="my-12 grid grid-cols-3 gap-10 md:grid-cols-4">
+          <div className="my-12 grid grid-cols-1 place-items-center gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {[...Array(7)].map((_, index) => (
               <div key={index} className="flex w-full flex-col items-center justify-center gap-2.5">
                 <Image
@@ -64,33 +65,8 @@ export default function AboutYouths() {
             ))}
           </div>
 
-          <div className="my-20 grid w-full gap-4 md:grid-cols-4">
-            {/* Left big image */}
-            <div className="relative col-span-2 h-[400px] w-full overflow-hidden md:h-[600px]">
-              <Image
-                src="/images/hero.png"
-                alt="Church congregation"
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 66vw"
-              />
-            </div>
-
-            {/* Right 2x2 grid of same image */}
-            <div className="col-span-2 grid grid-cols-2 gap-4">
-              {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="relative h-[190px] w-full overflow-hidden md:h-[290px]">
-                  <Image
-                    src="/images/hero.png"
-                    alt={`Church congregation ${i + 1}`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 50vw, 33vw"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
+          {/* Gallery Section */}
+          <GallerySection />
         </div>
       </section>
     </div>

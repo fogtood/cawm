@@ -35,8 +35,8 @@ export default function About() {
           ctus.
         </p>
 
-        <div className="my-20 flex items-center justify-center gap-10 md:gap-20">
-          <div className="max-w-md text-center">
+        <div className="my-20 flex flex-wrap items-center justify-center gap-10 md:gap-20">
+          <div className="max-w-md sm:text-center">
             <h2 className="mb-4 text-2xl font-semibold">Mission</h2>
             <p className="text-base leading-7 text-[#575756] md:text-lg md:leading-9">
               Lorem ipsum dolor sit amet consectetur. Leo in sed magna sapien purus augue duis. Id
@@ -45,7 +45,7 @@ export default function About() {
               sagittis. Ut massa est vitae e
             </p>
           </div>
-          <div className="max-w-md text-center">
+          <div className="max-w-md sm:text-center">
             <h2 className="mb-4 text-2xl font-semibold">Vision</h2>
             <p className="text-base leading-7 text-[#575756] md:text-lg md:leading-9">
               Lorem ipsum dolor sit amet consectetur. Leo in sed magna sapien purus augue duis. Id
@@ -66,10 +66,16 @@ export default function About() {
             imperdiet cursus. Pellentesque elementum risus id blandit morbi elit praesent.
           </p>
 
-          <div className="mt-12 mb-40 grid grid-cols-3 gap-10 md:grid-cols-4">
+          <div className="my-12 grid grid-cols-1 place-items-center gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {[...Array(7)].map((_, index) => (
               <div key={index} className="flex w-full flex-col items-center justify-center gap-2.5">
-                <Image src="/images/pastor.png" alt="Pastor" width={320} height={320} />
+                <Image
+                  src="/images/pastor.png"
+                  alt="Pastor"
+                  width={320}
+                  height={320}
+                  className="object-contain"
+                />
                 <div className="text-center">
                   <h3 className="text-lg font-semibold text-[#4A4A4A]">Pastor Emmanuel Johnson</h3>
                   <p className="text-[#636363]">General Overseer</p>
