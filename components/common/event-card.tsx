@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 
 const EventCard = () => {
   return (
-    <div className="max-w-md cursor-pointer">
+    <div className="max-w-md">
       <Image
         src="/images/event.png"
         alt="Event"

@@ -12,7 +12,7 @@ export default function EventDetails() {
       />
 
       <div className="container mx-auto my-20 px-4 md:px-6">
-        <div className="flex flex-wrap items-center justify-between gap-5">
+        <div className="flex flex-wrap items-center justify-between gap-4">
           <h1 className="text-2xl font-semibold text-[#1A1A1A]">Mid-Week Service</h1>
           <Button
             className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-3 text-base font-normal"
