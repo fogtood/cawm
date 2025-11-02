@@ -1,10 +1,31 @@
 import Image from 'next/image'
+import { Separator } from '../ui/separator'
 
-const Bg = ({ title, subtitle }: { title: string; subtitle: string }) => {
+const Bg = ({
+  title,
+  subtitle,
+  type,
+  preacher,
+  date,
+  background,
+}: {
+  title: string
+  subtitle?: string
+  type?: string
+  preacher?: string
+  date?: string
+  background?: string
+}) => {
   return (
     <div className="relative h-[505px] w-full text-white">
       {/* Background image */}
-      <Image src="/images/hero.png" alt="Background" fill priority className="object-cover" />
+      <Image
+        src={background || '/images/hero.png'}
+        alt="Background"
+        fill
+        priority
+        className="object-cover"
+      />
 
       {/* Gradient overlays */}
       {/* Top-to-bottom gradient */}
@@ -14,10 +35,21 @@ const Bg = ({ title, subtitle }: { title: string; subtitle: string }) => {
       <div className="absolute inset-0 bg-linear-to-r from-[rgba(33,33,32,0.8)] via-[rgba(33,33,32,0.4)] to-[rgba(33,33,32,0)]" />
 
       {/* Content */}
-      <div className="absolute inset-0 mx-auto flex max-w-6xl flex-col items-center justify-center gap-3 px-4 text-center">
-        <h1 className="text-3xl font-semibold sm:text-4xl md:text-6xl">{title}</h1>
-        <p className="text-xl sm:text-2xl">{subtitle}</p>
-      </div>
+      {type === 'sermon' ? (
+        <div className="absolute inset-0 mx-auto flex max-w-3xl flex-col items-center justify-center px-4 text-center">
+          <h1 className="text-3xl font-semibold sm:text-4xl md:text-6xl">{title}</h1>
+          <Separator className="my-5" />
+          <div className="flex w-full flex-wrap items-center justify-evenly gap-3 text-center">
+            <p className="text-xl sm:text-2xl">{preacher}</p>
+            <p className="text-xl sm:text-2xl">{date}</p>
+          </div>
+        </div>
+      ) : (
+        <div className="absolute inset-0 mx-auto flex max-w-3xl flex-col items-center justify-center gap-3 px-4 text-center">
+          <h1 className="text-3xl font-semibold sm:text-4xl md:text-6xl">{title}</h1>
+          <p className="text-xl sm:text-2xl">{subtitle}</p>
+        </div>
+      )}
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import EventCard from '@/components/common/event-card'
 import SermonCard from '@/components/common/sermon-card'
+import YoutubeEmbed from '@/components/common/youtube-embed'
 import { Button } from '@/components/ui/button'
 import { PlayIcon } from 'lucide-react'
 import Image from 'next/image'
@@ -152,16 +153,7 @@ export default function Home() {
             </h3>
             <p className="mt-1 text-[#575756]">Stay connected to our live streams</p>
           </div>
-          <div className="relative my-10 w-full pt-[56.25%]">
-            <iframe
-              className="absolute top-0 left-0 h-full w-full"
-              src="https://www.youtube.com/embed/s7jXASBWwwI?si=G0e9S9pFgClkncfO"
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
-            ></iframe>
-          </div>
+          <YoutubeEmbed />
         </div>
       </section>
 
