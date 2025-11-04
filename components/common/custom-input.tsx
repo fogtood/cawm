@@ -29,11 +29,17 @@ const CustomInput = ({ name, label, type, placeholder }: CustomInputProps) => {
           <SelectTrigger className="h-full! rounded-none border-[#D1D5DB]! p-3.75 text-[#575756] placeholder-[#9CA3AF] shadow-none ring-0!">
             <SelectValue placeholder={placeholder} />
           </SelectTrigger>
-          <SelectContent className="text-[#575756]">
-            <SelectItem value="volunteering">Volunteering</SelectItem>
-            <SelectItem value="prayer-request">Prayer Request</SelectItem>
-            <SelectItem value="general-enquiry">General Enquiry</SelectItem>
-            <SelectItem value="media-resources">Media & Resources</SelectItem>
+          <SelectContent className="rounded-none text-[#575756]">
+            {[
+              { value: 'volunteering', title: 'Volunteering' },
+              { value: 'prayer-request', title: 'Prayer Request' },
+              { value: 'general-enquiry', title: 'General Enquiry' },
+              { value: 'media-resources', title: 'Media & Resources' },
+            ].map(({ value, title }) => (
+              <SelectItem key={value} value={value} className="rounded-none">
+                {title}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
       ) : (

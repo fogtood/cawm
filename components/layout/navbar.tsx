@@ -2,16 +2,75 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, ChevronDown, ChevronUp } from 'lucide-react'
 import Brand from '@/components/common/brand'
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from '../ui/navigation-menu'
+import { Button } from '../ui/button'
+import { cn } from '@/lib/utils'
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible'
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '../ui/sheet'
+
+interface MenuItem {
+  title: string
+  href?: string
+  subMenu?: MenuItem[]
+}
+
+const menuItems: MenuItem[] = [
+  {
+    title: 'Home',
+    href: '/',
+  },
+  {
+    title: 'About',
+    subMenu: [
+      {
+        title: 'CAWM',
+        href: '/about',
+      },
+      {
+        title: 'Youth',
+        href: '/about/youths',
+      },
+      {
+        title: 'Ministries',
+        href: '/about/ministries',
+      },
+    ],
+  },
+  {
+    title: 'Resources',
+    subMenu: [
+      {
+        title: 'Media',
+        href: '/media',
+      },
+      {
+        title: 'Events',
+        href: '/events',
+      },
+      {
+        title: 'Sermons',
+        href: '/sermons',
+      },
+    ],
+  },
+  {
+    title: 'Contact',
+    href: '/contact',
+  },
+]
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null)
-
-  const toggleDropdown = (name: string) => {
-    setOpenDropdown(openDropdown === name ? null : name)
-  }
+  const [open, setOpen] = useState(false)
 
   return (
     <nav className="w-full bg-white">
@@ -20,112 +79,114 @@ const Navbar = () => {
         <Brand />
 
         {/* Desktop Links */}
-        <div className="hidden space-x-8 text-lg font-medium md:flex">
-          <Link href="/" className="transition hover:text-blue-600">
-            Home
-          </Link>
+        <NavigationMenu className="hidden text-[#262626]! md:block">
+          <NavigationMenuList className="flex gap-8">
+            {menuItems.map((item) => (
+              <NavigationMenuItem key={item.title}>
+                {item.subMenu ? (
+                  <>
+                    <NavigationMenuTrigger className="bg-transparent! p-0 text-lg font-medium">
+                      {item.title}
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent className="rounded-none border-none shadow-none">
+                      <ul className="grid w-[135px] gap-4 p-3">
+                        {item.subMenu.map((subItem) => (
+                          <li key={subItem.title}>
+                            <NavigationMenuLink className="bg-transparent!" asChild>
+                              <Link href={subItem.href ?? '/'}>{subItem.title}</Link>
+                            </NavigationMenuLink>
+                          </li>
+                        ))}
+                      </ul>
+                    </NavigationMenuContent>
+                  </>
+                ) : (
+                  <NavigationMenuLink
+                    asChild
+                    className={`${navigationMenuTriggerStyle()} bg-transparent! p-0 text-lg font-medium after:absolute after:-bottom-0.5 after:left-0 after:h-0.5 after:w-0 after:bg-[#393798] after:transition-all after:duration-300 hover:after:w-full`}
+                  >
+                    <Link href={item.href ?? '/'}>{item.title}</Link>
+                  </NavigationMenuLink>
+                )}
+              </NavigationMenuItem>
+            ))}
+          </NavigationMenuList>
+        </NavigationMenu>
 
-          <div className="relative">
-            <button
-              onClick={() => toggleDropdown('about')}
-              className="flex items-center gap-1 transition hover:text-blue-600"
-            >
-              About Us <ChevronDown size={14} />
-            </button>
-            {openDropdown === 'about' && (
-              <div className="absolute mt-2 w-40 rounded-md bg-white p-2 shadow-md">
-                <Link
-                  href="/about/history"
-                  className="block rounded-md px-3 py-2 hover:bg-gray-100"
-                >
-                  History
-                </Link>
-                <Link href="/about/team" className="block rounded-md px-3 py-2 hover:bg-gray-100">
-                  Our Team
-                </Link>
-              </div>
-            )}
-          </div>
+        {/* Mobile */}
+        <Sheet open={open} onOpenChange={setOpen}>
+          <SheetTrigger asChild>
+            <Button variant="ghost" size="icon" className="md:hidden">
+              <Menu className="size-6" />
+              <span className="sr-only">Toggle menu</span>
+            </Button>
+          </SheetTrigger>
 
-          <div className="relative">
-            <button
-              onClick={() => toggleDropdown('resources')}
-              className="flex items-center gap-1 transition hover:text-blue-600"
-            >
-              Resources <ChevronDown size={14} />
-            </button>
-            {openDropdown === 'resources' && (
-              <div className="absolute mt-2 w-40 rounded-md bg-white p-2 shadow-md">
-                <Link
-                  href="/resources/blog"
-                  className="block rounded-md px-3 py-2 hover:bg-gray-100"
-                >
-                  Blog
-                </Link>
-                <Link
-                  href="/resources/gallery"
-                  className="block rounded-md px-3 py-2 hover:bg-gray-100"
-                >
-                  Gallery
-                </Link>
-              </div>
-            )}
-          </div>
-
-          <Link href="/contact" className="transition hover:text-blue-600">
-            Contact Us
-          </Link>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <button className="p-2 text-gray-700 md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+          <SheetContent side="left" className="w-64 px-5 py-10 text-[#262626] md:hidden">
+            <SheetTitle className="sr-only" />
+            <nav className="flex flex-col space-y-4">
+              {menuItems.map((item) => (
+                <MenuItemComponent key={item.title} item={item} setParentOpen={setOpen} />
+              ))}
+            </nav>
+          </SheetContent>
+        </Sheet>
       </div>
-
-      {/* Mobile Sidebar */}
-      {menuOpen && (
-        <div className="border-t bg-white shadow-md md:hidden">
-          <div className="flex flex-col space-y-4 p-4">
-            <Link href="/" className="transition hover:text-blue-600">
-              Home
-            </Link>
-
-            <details>
-              <summary className="flex cursor-pointer items-center justify-between">
-                About Us
-              </summary>
-              <div className="mt-2 flex flex-col space-y-2 pl-4">
-                <Link href="/about/history" className="hover:text-blue-600">
-                  History
-                </Link>
-                <Link href="/about/team" className="hover:text-blue-600">
-                  Our Team
-                </Link>
-              </div>
-            </details>
-
-            <details>
-              <summary className="flex cursor-pointer items-center justify-between">
-                Resources
-              </summary>
-              <div className="mt-2 flex flex-col space-y-2 pl-4">
-                <Link href="/resources/blog" className="hover:text-blue-600">
-                  Blog
-                </Link>
-                <Link href="/resources/gallery" className="hover:text-blue-600">
-                  Gallery
-                </Link>
-              </div>
-            </details>
-
-            <Link href="/contact" className="transition hover:text-blue-600">
-              Contact Us
-            </Link>
-          </div>
-        </div>
-      )}
     </nav>
+  )
+}
+
+interface MenuItemComponentProps {
+  item: MenuItem
+  depth?: number
+  setParentOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const MenuItemComponent = ({ item, depth = 0, setParentOpen }: MenuItemComponentProps) => {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleLinkClick = () => setParentOpen(false)
+
+  if (item.subMenu) {
+    return (
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+        <CollapsibleTrigger asChild>
+          <button
+            className={cn(
+              'flex w-full items-center justify-between py-2 text-lg font-medium',
+              depth > 0 && 'pl-4'
+            )}
+          >
+            {item.title}
+            {isOpen ? <ChevronUp className="size-6" /> : <ChevronDown className="size-6" />}
+          </button>
+        </CollapsibleTrigger>
+        <CollapsibleContent>
+          {item.subMenu.map((subItem) => (
+            <MenuItemComponent
+              key={subItem.title}
+              item={subItem}
+              depth={depth + 1}
+              setParentOpen={setParentOpen}
+            />
+          ))}
+        </CollapsibleContent>
+      </Collapsible>
+    )
+  }
+
+  return (
+    <Link
+      href={item.href ?? '/'}
+      className={cn(
+        'block py-2 text-lg font-medium',
+        depth > 0 && 'pl-4 text-base',
+        item.href === '/' && 'text-primary'
+      )}
+      onClick={handleLinkClick}
+    >
+      {item.title}
+    </Link>
   )
 }
 
