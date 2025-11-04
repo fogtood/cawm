@@ -30,7 +30,7 @@ const menuItems: MenuItem[] = [
     href: '/',
   },
   {
-    title: 'About',
+    title: 'About Us',
     subMenu: [
       {
         title: 'CAWM',
@@ -64,7 +64,7 @@ const menuItems: MenuItem[] = [
     ],
   },
   {
-    title: 'Contact',
+    title: 'Contact Us',
     href: '/contact',
   },
 ]
@@ -178,11 +178,7 @@ const MenuItemComponent = ({ item, depth = 0, setParentOpen }: MenuItemComponent
   return (
     <Link
       href={item.href ?? '/'}
-      className={cn(
-        'block py-2 text-lg font-medium',
-        depth > 0 && 'pl-4 text-base',
-        item.href === '/' && 'text-primary'
-      )}
+      className={cn('block py-2 text-lg font-medium', depth > 0 && 'pl-4 text-base')}
       onClick={handleLinkClick}
     >
       {item.title}
