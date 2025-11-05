@@ -55,25 +55,17 @@ export default function Home() {
 
       <section className="container mx-auto my-20 px-4 md:px-6">
         {/* Welcome section */}
-        <div className="flex w-full flex-col items-center gap-10 md:flex-row md:gap-16">
-          <div className="w-full min-w-[280px] sm:min-w-[320px] md:w-1/3">
-            <Image
-              src="/images/welcome.png"
-              alt="Welcome"
-              width={800}
-              height={800}
-              className="h-auto w-full object-cover"
-            />
+        <div className="flex w-full flex-col items-center gap-6 md:flex-row md:gap-10 lg:gap-16">
+          <div className="relative h-[250px] w-full min-w-[280px] sm:min-w-[320px] md:h-[400px] md:w-1/3">
+            <Image src="/images/welcome.png" alt="Welcome" fill className="object-cover" />
           </div>
 
-          <div className="w-full flex-1 text-left">
-            <h2 className="text-xl leading-10 font-medium md:text-2xl md:leading-12">
-              You are welcome to <br />
-              <span className="text-2xl font-semibold uppercase md:text-3xl">
-                Christ Apostolic World Ministry
-              </span>
+          <div className="flex-1 text-center md:text-left">
+            <p className="text-xl leading-10 font-medium tracking-wide">You are welcome to</p>
+            <h2 className="text-2xl font-semibold tracking-wide uppercase md:text-3xl">
+              Christ Apostolic World Ministry
             </h2>
-            <p className="my-4 line-clamp-6 text-base leading-7 text-[#575756] md:text-lg md:leading-9">
+            <p className="my-4 line-clamp-6 leading-relaxed text-[#575756] md:text-lg">
               Lorem ipsum dolor sit amet consectetur. Leo in sed magna sapien purus augue duis. Id
               imperdiet a tristique quam ultrices tincidunt suspendisse nec mauris. Diam amet
               ullamcorper sed sed a sapien. Tincidunt tellus bibendum proin pharetra est in et
@@ -102,7 +94,7 @@ export default function Home() {
       <section className="container mx-auto my-20 px-4 md:px-6">
         <div className="my-30">
           <div className="flex flex-wrap items-center justify-between gap-5">
-            <div className="space-y-1 text-[#1A1A1A]">
+            <div className="space-y-1 text-center text-[#1A1A1A] md:text-left">
               <h1 className="text-2xl font-semibold">Our Sermons</h1>
               <p>Dive into our collection of powerful sermons and series.</p>
             </div>
@@ -128,7 +120,7 @@ export default function Home() {
       {/* Our Services */}
       <div className="bg-[#F6F6FF] py-10">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="space-y-1 text-[#1A1A1A]">
+          <div className="space-y-1 text-center text-[#1A1A1A] md:text-left">
             <h1 className="text-2xl font-semibold">Our Services</h1>
             <p>Lorem ipsum dolor sit amet consectetur. Leo in sed magna sap.</p>
           </div>
@@ -170,7 +162,7 @@ export default function Home() {
       <div className="bg-[#F6F6FF] py-10">
         <div className="container mx-auto px-4 md:px-6">
           <div className="flex flex-wrap items-center justify-between gap-5">
-            <div className="space-y-1 text-[#1A1A1A]">
+            <div className="space-y-1 text-center text-[#1A1A1A] md:text-left">
               <h1 className="text-2xl font-semibold">Upcoming Events</h1>
               <p>Join us for our upcoming gatherings and activities</p>
             </div>
@@ -196,7 +188,7 @@ export default function Home() {
       {/* Testimonies section */}
       <section className="container mx-auto my-20 px-4 md:px-6">
         <div className="mb-30">
-          <div className="space-y-1 text-[#1A1A1A]">
+          <div className="space-y-1 text-center text-[#1A1A1A] md:text-left">
             <h1 className="text-2xl font-semibold">Testimonies</h1>
             <p>Lorem ipsum dolor sit amet consectetur.</p>
           </div>

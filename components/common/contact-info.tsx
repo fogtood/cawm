@@ -8,7 +8,7 @@ const ContactInfo = ({
   icon: React.ReactNode
 }) => {
   return (
-    <div className="flex gap-3">
+    <div className="flex items-center gap-3">
       <span className="flex size-12 shrink-0 items-center justify-center rounded-sm bg-[#E8E7F6] [&>svg]:size-6 [&>svg]:text-[#393798]">
         {icon}
       </span>

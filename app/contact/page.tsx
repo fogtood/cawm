@@ -9,7 +9,7 @@ export default function Contact() {
   return (
     <div>
       <Bg title="Contact Us" subtitle="Get in touch with us for any inquiries or support" />
-      <div className="container mx-auto my-20 grid grid-cols-1 gap-12 px-4 md:grid md:grid-cols-2 md:gap-18 md:px-6 lg:gap-25">
+      <div className="container mx-auto my-20 grid grid-cols-1 justify-between gap-10 px-4 md:grid md:grid-cols-2 md:gap-15 md:px-6 lg:gap-20">
         <div className="space-y-12">
           <div>
             <h1 className="text-2xl font-semibold">Get in Touch</h1>
@@ -45,7 +45,7 @@ export default function Contact() {
           <div className="mt-5 w-full">
             <FieldSet>
               <FieldGroup>
-                <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+                <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
                   <CustomInput
                     name="name"
                     label="Full Name"
@@ -59,7 +59,9 @@ export default function Contact() {
                     type="email"
                     placeholder="your.email@example.com"
                   />
+                </div>
 
+                <div className="grid grid-cols-1 items-end gap-5 lg:grid-cols-2">
                   <CustomInput
                     name="phone"
                     label="Phone Number"

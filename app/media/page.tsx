@@ -10,21 +10,15 @@ export default function Media() {
         subtitle="Lorem ipsum dolor sit amet consectetur. Dictum vestibulum ui ornare neque facilisis."
       />
 
-      <div className="container mx-auto my-20 grid grid-cols-1 place-items-center gap-10 px-4 sm:grid-cols-2 md:grid-cols-3 md:px-6 lg:grid-cols-4 xl:grid-cols-5">
+      <div className="container mx-auto my-20 grid grid-cols-2 place-items-center gap-6 px-4 sm:grid-cols-3 md:grid-cols-4 md:px-6 lg:grid-cols-5">
         {[...Array(16)].map((_, index) => (
           <Link href="/media" key={index}>
-            <div className="flex w-full cursor-pointer flex-col items-center justify-center gap-2.5">
-              <Image
-                src="/images/folder.png"
-                alt="Folder"
-                width={250}
-                height={250}
-                className="w-full object-contain"
-              />
-              <div className="text-center">
-                <h3 className="text-sm font-semibold text-[#4A4A4A]">Mid-Week Service Shots</h3>
-                <p className="text-xs text-[#636363]">(11 - 01 - 2025)</p>
+            <div className="flex cursor-pointer flex-col items-center text-center transition-transform duration-300 hover:scale-105">
+              <div className="relative h-[140px] w-[140px]">
+                <Image src="/images/folder.png" alt="Folder" fill className="object-contain" />
               </div>
+              <h3 className="text-sm font-medium text-[#4A4A4A]">Mid-Week Service Shots</h3>
+              <p className="text-xs text-[#636363]">(11 - 01 - 2025)</p>
             </div>
           </Link>
         ))}
