@@ -1,5 +1,8 @@
 import EventCard from '@/components/common/event-card'
+import MissionCard from '@/components/common/mission-card'
 import SermonCard from '@/components/common/sermon-card'
+import ServiceCard from '@/components/common/service-card'
+import TestimonialCarousel from '@/components/common/testimonial-carousel'
 import YoutubeEmbed from '@/components/common/youtube-embed'
 import { Button } from '@/components/ui/button'
 import { PlayIcon } from 'lucide-react'
@@ -23,9 +26,15 @@ export default function Home() {
 
         {/* Content */}
         <div className="absolute inset-0 mx-auto flex max-w-6xl flex-col items-center justify-center gap-6 px-4 text-center sm:gap-8">
-          <h1 className="text-3xl font-bold text-white sm:text-4xl md:text-6xl lg:text-7xl">
-            Christ Apostolic World Ministry
-          </h1>
+          <div className="text-white">
+            <h1 className="text-4xl font-bold tracking-wider sm:text-5xl md:text-6xl">
+              Christ Apostolic World Ministry
+            </h1>
+            <p className="mx-auto mt-3 max-w-4xl text-lg leading-relaxed font-normal sm:text-xl">
+              Lorem ipsum dolor sit amet consectetur. Leo in sed magna sapien purus augue duis. Id
+              imperdiet a tristique quam ultrices ti
+            </p>
+          </div>
           <div className="flex flex-wrap items-center justify-center gap-5">
             <Button
               size="icon"
@@ -58,9 +67,9 @@ export default function Home() {
           </div>
 
           <div className="w-full flex-1 text-left">
-            <h2 className="text-2xl leading-10 font-medium md:text-3xl md:leading-12">
+            <h2 className="text-xl leading-10 font-medium md:text-2xl md:leading-12">
               You are welcome to <br />
-              <span className="text-3xl font-semibold uppercase md:text-4xl">
+              <span className="text-2xl font-semibold uppercase md:text-3xl">
                 Christ Apostolic World Ministry
               </span>
             </h2>
@@ -81,7 +90,16 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Sermons section */}
+        {/* Mission section */}
+        <div className="my-20 grid grid-cols-1 place-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {[...Array(3)].map((_, idx) => (
+            <MissionCard key={idx} />
+          ))}
+        </div>
+      </section>
+
+      {/* Sermons section */}
+      <section className="container mx-auto my-20 px-4 md:px-6">
         <div className="my-30">
           <div className="flex flex-wrap items-center justify-between gap-5">
             <div className="space-y-1 text-[#1A1A1A]">
@@ -97,7 +115,7 @@ export default function Home() {
           </div>
 
           {/* Cards grid */}
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="mt-8 grid grid-cols-1 place-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {/* SermonCard components would be mapped here */}
             <SermonCard />
             <SermonCard />
@@ -107,29 +125,20 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Upcoming Events */}
+      {/* Our Services */}
       <div className="bg-[#F6F6FF] py-10">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="flex flex-wrap items-center justify-between gap-5">
-            <div className="space-y-1 text-[#1A1A1A]">
-              <h1 className="text-2xl font-semibold">Upcoming Events</h1>
-              <p>Join us for our upcoming gatherings and activities</p>
-            </div>
-            <Button
-              className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-3 text-base font-normal"
-              asChild
-            >
-              <Link href="/sermons">View All Events</Link>
-            </Button>
+          <div className="space-y-1 text-[#1A1A1A]">
+            <h1 className="text-2xl font-semibold">Our Services</h1>
+            <p>Lorem ipsum dolor sit amet consectetur. Leo in sed magna sap.</p>
           </div>
 
           {/* Cards grid */}
-          <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div className="mt-8 grid grid-cols-1 place-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {/* EventCard components would be mapped here */}
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
+            <ServiceCard />
+            <ServiceCard />
+            <ServiceCard />
           </div>
         </div>
       </div>
@@ -157,8 +166,50 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Upcoming Events */}
+      <div className="bg-[#F6F6FF] py-10">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="flex flex-wrap items-center justify-between gap-5">
+            <div className="space-y-1 text-[#1A1A1A]">
+              <h1 className="text-2xl font-semibold">Upcoming Events</h1>
+              <p>Join us for our upcoming gatherings and activities</p>
+            </div>
+            <Button
+              className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-3 text-base font-normal"
+              asChild
+            >
+              <Link href="/sermons">View All Events</Link>
+            </Button>
+          </div>
+
+          {/* Cards grid */}
+          <div className="mt-8 grid grid-cols-1 place-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {/* EventCard components would be mapped here */}
+            <EventCard />
+            <EventCard />
+            <EventCard />
+            <EventCard />
+          </div>
+        </div>
+      </div>
+
+      {/* Testimonies section */}
+      <section className="container mx-auto my-20 px-4 md:px-6">
+        <div className="mb-30">
+          <div className="space-y-1 text-[#1A1A1A]">
+            <h1 className="text-2xl font-semibold">Testimonies</h1>
+            <p>Lorem ipsum dolor sit amet consectetur.</p>
+          </div>
+
+          {/* Cards grid */}
+          <div className="mt-8">
+            <TestimonialCarousel />
+          </div>
+        </div>
+      </section>
+
       {/* Join Community */}
-      <div className="bg-[#F6F6FF] py-20">
+      {/* <div className="bg-[#F6F6FF] py-20">
         <div className="container mx-auto px-4 md:px-6">
           <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-4 text-center">
             <h1 className="text-3xl font-semibold uppercase md:text-4xl">
@@ -176,7 +227,7 @@ export default function Home() {
             </Button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

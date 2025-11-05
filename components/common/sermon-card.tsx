@@ -5,14 +5,17 @@ import Link from 'next/link'
 const SermonCard = () => {
   return (
     <Link href="/sermons/dont-escape-engage">
-      <div className="w-full max-w-[400px] rounded-md shadow-md blur-out-md">
-        <Image
-          src="/images/sermon.png"
-          alt="Sermon"
-          width={400}
-          height={250}
-          className="h-auto w-full object-cover"
-        />
+      <div className="w-full max-w-sm rounded-md shadow-md blur-out-md">
+        <div className="relative h-48 w-full">
+          <Image
+            src="/images/sermon.png"
+            alt="Sermon"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 400px"
+            priority
+          />
+        </div>
         <div className="px-4 py-6 text-sm text-[#1A1A1A]">
           <h3 className="text-lg font-semibold">Don&apos;t Escape, Engage</h3>
           <p className="my-4 line-clamp-3">

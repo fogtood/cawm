@@ -4,14 +4,17 @@ import { Button } from '../ui/button'
 
 const EventCard = () => {
   return (
-    <div className="max-w-md">
-      <Image
-        src="/images/event.png"
-        alt="Event"
-        width={400}
-        height={250}
-        className="h-auto w-full rounded-lg object-cover"
-      />
+    <div className="w-full max-w-sm">
+      <div className="relative h-46 w-full overflow-hidden rounded-lg">
+        <Image
+          src="/images/event.png"
+          alt="Event"
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 100vw, 400px"
+          priority
+        />
+      </div>
       <div className="py-6 text-sm text-[#161C2D]">
         <h3 className="text-lg font-semibold">Mid-Week Service</h3>
         <p className="my-2 line-clamp-3">
