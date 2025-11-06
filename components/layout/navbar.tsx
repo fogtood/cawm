@@ -90,10 +90,10 @@ const Navbar = () => {
                       {item.title}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent className="rounded-none border-none shadow-none">
-                      <ul className="grid w-[135px] gap-4 p-3">
+                      <ul className="grid w-[135px] gap-2 p-3">
                         {item.subMenu.map((subItem) => (
                           <li key={subItem.title}>
-                            <NavigationMenuLink className="bg-transparent!" asChild>
+                            <NavigationMenuLink className="bg-transparent! text-lg" asChild>
                               <Link href={subItem.href ?? '/'}>{subItem.title}</Link>
                             </NavigationMenuLink>
                           </li>
