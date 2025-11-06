@@ -93,7 +93,7 @@ export default function Home() {
       {/* Sermons section */}
       <section className="container mx-auto my-20 px-4 md:px-6">
         <div className="my-30">
-          <div className="flex flex-wrap items-center justify-between gap-5">
+          <div className="flex flex-wrap items-center justify-center gap-5 md:justify-between">
             <div className="space-y-1 text-center text-[#1A1A1A] md:text-left">
               <h1 className="text-2xl font-semibold">Our Sermons</h1>
               <p>Dive into our collection of powerful sermons and series.</p>
@@ -161,7 +161,7 @@ export default function Home() {
       {/* Upcoming Events */}
       <div className="bg-[#F6F6FF] py-10">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="flex flex-wrap items-center justify-between gap-5">
+          <div className="flex flex-wrap items-center justify-center gap-5 md:justify-between">
             <div className="space-y-1 text-center text-[#1A1A1A] md:text-left">
               <h1 className="text-2xl font-semibold">Upcoming Events</h1>
               <p>Join us for our upcoming gatherings and activities</p>
