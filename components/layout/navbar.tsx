@@ -17,6 +17,7 @@ import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible'
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '../ui/sheet'
+// import { useRouter } from 'next/navigation'
 
 interface MenuItem {
   title: string
@@ -145,7 +146,14 @@ interface MenuItemComponentProps {
 const MenuItemComponent = ({ item, depth = 0, setParentOpen }: MenuItemComponentProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleLinkClick = () => setParentOpen(false)
+  // const router = useRouter()
+
+  // const handleNavigate = (href: string) => {
+  //   setParentOpen(false)
+  //   router.push(href)
+  // }
+
+  // const handleLinkClick = () => setParentOpen(false)
 
   if (item.subMenu) {
     return (
@@ -176,13 +184,26 @@ const MenuItemComponent = ({ item, depth = 0, setParentOpen }: MenuItemComponent
   }
 
   return (
-    <Link
-      href={item.href ?? '/'}
-      className={cn('block py-2 text-lg font-medium', depth > 0 && 'pl-4 text-base')}
-      onClick={handleLinkClick}
+    // <div
+    //   // href={item.href ?? '/'}
+    //   // onClick={() => handleNavigate(item.href ?? '/')}
+    //   className={cn('block py-2 text-lg font-medium', depth > 0 && 'pl-4 text-base')}
+    //   // onClick={handleLinkClick}
+    // >
+    //   <Link href={item.href ?? '/'} onClick={handleLinkClick} className="w-full">
+    //     {item.title}
+    //   </Link>
+    // </div>
+    <a
+      href={item.href}
+      className={cn(
+        'block py-2 text-lg font-medium transition-colors hover:text-primary',
+        depth > 0 && 'pl-4',
+        item.href === '/' && 'text-primary'
+      )}
     >
       {item.title}
-    </Link>
+    </a>
   )
 }
 
