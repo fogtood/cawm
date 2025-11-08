@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import './globals.css'
 import Navbar from '@/components/layout/navbar'
 import Footer from '@/components/layout/footer'
+import AOSInit from '@/components/common/aos-init'
 
 const clashDisplay = localFont({
   src: [
@@ -43,6 +44,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${clashDisplay.className} font-sans antialiased`}>
+        <AOSInit />
         <div className="flex min-h-screen flex-col">
           <Navbar />
           <section className="flex-1">{children}</section>
