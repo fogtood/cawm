@@ -15,9 +15,16 @@ export default function SermonDetail() {
       />
 
       <section className="container mx-auto my-20 px-4 md:px-6">
-        <h1 className="text-2xl font-semibold">Don&apos;t Escape, Engage!</h1>
+        <h1 className="text-2xl font-semibold" data-aos="fade-up" data-aos-duration="800">
+          Don&apos;t Escape, Engage!
+        </h1>
 
-        <p className="my-4 text-base leading-7 text-[#575756] md:text-lg md:leading-9">
+        <p
+          className="my-4 text-base leading-7 text-[#575756] md:text-lg md:leading-9"
+          data-aos="fade-up"
+          data-aos-delay="100"
+          data-aos-duration="800"
+        >
           Lorem ipsum dolor sit amet consectetur. Leo in sed magna sapien purus augue duis. Id
           imperdiet a tristique quam ultrices tincidunt suspendisse nec mauris. Diam amet
           ullamcorper sed sed a sapien. Tincidunt tellus bibendum proin pharetra est in et sagittis.
@@ -31,7 +38,12 @@ export default function SermonDetail() {
           consequat adipiscing congue ultricies sem eget leLorem ipsum dolor sit amet consectetur.
         </p>
 
-        <p className="my-4 text-base leading-7 text-[#575756] md:text-lg md:leading-9">
+        <p
+          className="my-4 text-base leading-7 text-[#575756] md:text-lg md:leading-9"
+          data-aos="fade-up"
+          data-aos-delay="200"
+          data-aos-duration="800"
+        >
           Leo in sed magna sapien purus augue duis. Id imperdiet a tristique quam ultrices tincidunt
           suspendisse nec mauris. Diam amet ullamcorper sed sed a sapien. Tincidunt tellus bibendum
           proin pharetra est in et sagittis. Ut massa est vitae eget magna id. Parturient diam ut
@@ -45,7 +57,12 @@ export default function SermonDetail() {
           ctus.
         </p>
 
-        <div className="text-center">
+        <div
+          className="text-center"
+          data-aos="fade-up"
+          data-aos-delay="300"
+          data-aos-duration="800"
+        >
           <h3 className="mt-20 text-2xl font-semibold text-[#212120]">
             Watch via Youtube
             <span>
@@ -59,9 +76,16 @@ export default function SermonDetail() {
             </span>
           </h3>
 
-          <YoutubeEmbed />
+          <div data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
+            <YoutubeEmbed />
+          </div>
 
-          <p className="mt-1 flex flex-wrap items-center justify-center gap-5 text-lg font-medium text-[#000000]">
+          <p
+            className="mt-1 flex flex-wrap items-center justify-center gap-5 text-lg font-medium text-[#000000]"
+            data-aos="fade-up"
+            data-aos-delay="200"
+            data-aos-duration="800"
+          >
             You can also stream audio via the following platforms
             <span className="flex items-center justify-center gap-3">
               <Link href="/">

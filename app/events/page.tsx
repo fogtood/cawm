@@ -11,7 +11,9 @@ export default function Events() {
 
       <div className="container mx-auto my-20 grid grid-cols-1 place-items-center gap-8 px-4 sm:grid-cols-2 md:px-6 lg:grid-cols-3 xl:grid-cols-4">
         {[...Array(16)].map((_, index) => (
-          <EventCard key={index} />
+          <div key={index} data-aos="flip-left" data-aos-delay={index * 50} data-aos-duration="800">
+            <EventCard />
+          </div>
         ))}
       </div>
     </div>

@@ -13,7 +13,12 @@ export default function Media() {
       <div className="container mx-auto my-20 grid grid-cols-2 place-items-center gap-6 px-4 sm:grid-cols-3 md:grid-cols-4 md:px-6 lg:grid-cols-5">
         {[...Array(16)].map((_, index) => (
           <Link href="/media" key={index}>
-            <div className="flex cursor-pointer flex-col items-center text-center transition-transform duration-300 hover:scale-105">
+            <div
+              className="flex cursor-pointer flex-col items-center text-center transition-transform duration-300 hover:scale-105"
+              data-aos="zoom-in"
+              data-aos-delay={index * 50}
+              data-aos-duration="800"
+            >
               <div className="relative h-[140px] w-[140px]">
                 <Image src="/images/folder.png" alt="Folder" fill className="object-contain" />
               </div>

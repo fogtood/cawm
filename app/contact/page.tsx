@@ -10,7 +10,7 @@ export default function Contact() {
     <div>
       <Bg title="Contact Us" subtitle="Get in touch with us for any inquiries or support" />
       <div className="container mx-auto my-20 grid grid-cols-1 justify-between gap-10 px-4 md:grid md:grid-cols-2 md:gap-15 md:px-6 lg:gap-20">
-        <div className="space-y-12">
+        <div className="space-y-12" data-aos="fade-right" data-aos-duration="800">
           <div>
             <h1 className="text-2xl font-semibold">Get in Touch</h1>
             <div className="mt-5 space-y-8">
@@ -24,7 +24,7 @@ export default function Contact() {
             </div>
           </div>
 
-          <div>
+          <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
             <h1 className="text-2xl font-semibold">Find Us</h1>
             <div className="mt-5 h-[400px] w-full">
               <iframe
@@ -40,7 +40,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <div>
+        <div data-aos="fade-left" data-aos-duration="800">
           <h1 className="text-2xl font-semibold">Send us a Message</h1>
           <div className="mt-5 w-full">
             <FieldSet>

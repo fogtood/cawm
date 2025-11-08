@@ -9,8 +9,15 @@ export default function About() {
         subtitle="Explore our story, mission, and the community that makes us who we are"
       />
       <section className="container mx-auto my-20 px-4 md:px-6">
-        <h1 className="text-2xl font-semibold">About CAWM</h1>
-        <p className="my-4 text-base leading-7 text-[#575756] md:text-lg md:leading-9">
+        <h1 className="text-2xl font-semibold" data-aos="fade-up" data-aos-duration="800">
+          About CAWM
+        </h1>
+        <p
+          className="my-4 text-base leading-7 text-[#575756] md:text-lg md:leading-9"
+          data-aos="fade-up"
+          data-aos-delay="100"
+          data-aos-duration="800"
+        >
           Lorem ipsum dolor sit amet consectetur. Leo in sed magna sapien purus augue duis. Id
           imperdiet a tristique quam ultrices tincidunt suspendisse nec mauris. Diam amet
           ullamcorper sed sed a sapien. Tincidunt tellus bibendum proin pharetra est in et sagittis.
@@ -36,7 +43,7 @@ export default function About() {
         </p>
 
         <div className="my-20 flex flex-wrap items-center justify-center gap-10 md:gap-20">
-          <div className="max-w-md sm:text-center">
+          <div className="max-w-md sm:text-center" data-aos="fade-right" data-aos-duration="800">
             <h2 className="mb-4 text-2xl font-semibold">Mission</h2>
             <p className="text-base leading-7 text-[#575756] md:text-lg md:leading-9">
               Lorem ipsum dolor sit amet consectetur. Leo in sed magna sapien purus augue duis. Id
@@ -45,7 +52,7 @@ export default function About() {
               sagittis. Ut massa est vitae e
             </p>
           </div>
-          <div className="max-w-md sm:text-center">
+          <div className="max-w-md sm:text-center" data-aos="fade-left" data-aos-duration="800">
             <h2 className="mb-4 text-2xl font-semibold">Vision</h2>
             <p className="text-base leading-7 text-[#575756] md:text-lg md:leading-9">
               Lorem ipsum dolor sit amet consectetur. Leo in sed magna sapien purus augue duis. Id
@@ -57,8 +64,15 @@ export default function About() {
         </div>
 
         <div>
-          <h1 className="text-2xl font-semibold">Our Leadership</h1>
-          <p className="mt-4 text-base leading-7 text-[#575756] md:text-lg md:leading-9">
+          <h1 className="text-2xl font-semibold" data-aos="fade-up" data-aos-duration="800">
+            Our Leadership
+          </h1>
+          <p
+            className="mt-4 text-base leading-7 text-[#575756] md:text-lg md:leading-9"
+            data-aos="fade-up"
+            data-aos-delay="100"
+            data-aos-duration="800"
+          >
             Lorem ipsum dolor sit amet consectetur. Leo in sed magna sapien purus augue duis. Id
             imperdiet a tristique quam ultrices tincidunt suspendisse nec mauris. Diam amet
             ullamcorper sed sed a sapien. Tincidunt tellus bibendum proin pharetra est in et
@@ -68,7 +82,13 @@ export default function About() {
 
           <div className="my-12 grid grid-cols-1 place-items-center gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {[...Array(7)].map((_, index) => (
-              <div key={index} className="flex w-full flex-col items-center justify-center gap-2.5">
+              <div
+                key={index}
+                className="flex w-full flex-col items-center justify-center gap-2.5"
+                data-aos="zoom-in"
+                data-aos-delay={index * 100}
+                data-aos-duration="800"
+              >
                 <Image
                   src="/images/pastor.png"
                   alt="Pastor"

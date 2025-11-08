@@ -37,17 +37,46 @@ const Bg = ({
       {/* Content */}
       {type === 'sermon' ? (
         <div className="absolute inset-0 mx-auto flex max-w-3xl flex-col items-center justify-center px-4 text-center">
-          <h1 className="text-4xl font-semibold sm:text-5xl md:text-6xl">{title}</h1>
-          <Separator className="my-5" />
-          <div className="flex w-full flex-wrap items-center justify-evenly gap-3 text-center">
+          <h1
+            className="text-4xl font-semibold sm:text-5xl md:text-6xl"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
+            {title}
+          </h1>
+          <Separator
+            className="my-5"
+            data-aos="fade-up"
+            data-aos-delay="200"
+            data-aos-duration="1000"
+          />
+          <div
+            className="flex w-full flex-wrap items-center justify-evenly gap-3 text-center"
+            data-aos="fade-up"
+            data-aos-delay="400"
+            data-aos-duration="1000"
+          >
             <p className="text-xl sm:text-2xl">{preacher}</p>
             <p className="text-xl sm:text-2xl">{date}</p>
           </div>
         </div>
       ) : (
         <div className="absolute inset-0 mx-auto flex max-w-3xl flex-col items-center justify-center gap-3 px-4 text-center">
-          <h1 className="text-4xl font-semibold tracking-wider sm:text-5xl md:text-6xl">{title}</h1>
-          <p className="text-xl sm:text-2xl">{subtitle}</p>
+          <h1
+            className="text-4xl font-semibold tracking-wider sm:text-5xl md:text-6xl"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
+            {title}
+          </h1>
+          <p
+            className="text-xl sm:text-2xl"
+            data-aos="fade-up"
+            data-aos-delay="200"
+            data-aos-duration="1000"
+          >
+            {subtitle}
+          </p>
         </div>
       )}
     </div>
