@@ -1,15 +1,9 @@
 'use client'
 
-import Autoplay from 'embla-carousel-autoplay'
 import Image from 'next/image'
 import { Card, CardContent } from '@/components/ui/card'
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 
 const testimonials = [
   {
@@ -41,50 +35,45 @@ const testimonials = [
 
 const TestimonialCarousel = () => {
   return (
-    <Carousel
-      opts={{
-        align: 'start',
-        loop: true,
-      }}
-      plugins={[
-        Autoplay({
-          delay: 3000,
-        }),
-      ]}
-      className="mx-auto w-full max-w-6xl"
-    >
-      <CarouselContent>
-        {testimonials.map((t, i) => (
-          <CarouselItem key={i} className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+    <div className="w-full">
+      <Swiper
+        modules={[Autoplay, Navigation, Pagination]}
+        navigation
+        pagination={{ clickable: true }}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        spaceBetween={20}
+        breakpoints={{
+          0: { slidesPerView: 1 },
+          640: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+          1280: { slidesPerView: 4 },
+        }}
+        className="pb-[60px]"
+      >
+        {testimonials.map((item, index) => (
+          <SwiperSlide key={index}>
             <Card className="rounded-none border-none bg-[#F3F3FF] p-0 shadow-none">
               <CardContent className="flex h-full flex-col justify-between p-0 text-[#000000]">
                 <div className="flex flex-col items-start p-6">
                   <p className="mb-3 font-serif text-4xl">“</p>
-                  <p className="text-sm leading-relaxed">{t.text}</p>
+                  <p className="text-sm leading-relaxed">{item.text}</p>
                 </div>
 
                 <div className="mt-6 flex flex-col items-center justify-center bg-[#0b0b33] pt-16 pb-4">
                   <div className="relative -mt-24 h-14 w-14 overflow-hidden rounded-full border-2 border-white">
-                    <Image src={t.image} alt={t.name} fill className="object-cover" />
+                    <Image src={item.image} alt={item.name} fill className="object-cover" />
                   </div>
-                  <p className="mt-2 font-medium text-white">{t.name}</p>
+                  <p className="mt-2 font-medium text-white">{item.name}</p>
                 </div>
               </CardContent>
             </Card>
-          </CarouselItem>
+          </SwiperSlide>
         ))}
-      </CarouselContent>
-      <CarouselPrevious
-        variant="ghost"
-        size="icon-lg"
-        className="top-1/2 -left-4 z-10 h-8 w-8 -translate-y-1/2 rounded-full bg-white"
-      />
-      <CarouselNext
-        variant="ghost"
-        size="icon-lg"
-        className="top-1/2 -right-4 z-10 h-8 w-8 -translate-y-1/2 rounded-full bg-white"
-      />
-    </Carousel>
+      </Swiper>
+    </div>
   )
 }
 
