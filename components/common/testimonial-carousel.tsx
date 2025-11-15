@@ -30,34 +30,35 @@ const TestimonialCarousel = ({ testimonials }: { testimonials: Testimonial[] }) 
         }}
         className="pb-[60px]"
       >
-        {testimonials.map((item) => {
-          const imageUrl = item.image
-            ? urlFor(item.image).width(56).height(56).url()
-            : '/images/hero.png'
-          return (
-            <SwiperSlide key={item._id} className="h-full">
-              <div className="flex h-full min-h-[350px] flex-col rounded-none bg-[#F3F3FF] p-0 shadow-none">
-                <div className="flex flex-1 flex-col items-start p-6">
-                  <p className="font-serif text-5xl leading-none">“</p>
-                  <p className="line-clamp-6 text-sm leading-relaxed">{item.testimony}</p>
-                </div>
-
-                <div className="relative flex flex-col items-center justify-center bg-[#0b0b33] py-8">
-                  <div className="absolute -top-7 size-15 overflow-hidden rounded-full">
-                    <Image
-                      src={imageUrl}
-                      alt={item.name || 'testimonial image'}
-                      fill
-                      className="object-cover"
-                    />
+        {Array.isArray(testimonials) &&
+          testimonials.map((item) => {
+            const imageUrl = item.image
+              ? urlFor(item.image).width(56).height(56).url()
+              : '/images/hero.png'
+            return (
+              <SwiperSlide key={item._id} className="h-full">
+                <div className="flex h-full min-h-[350px] flex-col rounded-none bg-[#F3F3FF] p-0 shadow-none">
+                  <div className="flex flex-1 flex-col items-start p-6">
+                    <p className="font-serif text-5xl leading-none">“</p>
+                    <p className="line-clamp-6 text-sm leading-relaxed">{item.testimony}</p>
                   </div>
 
-                  <p className="mt-4 font-medium text-white">{item.name}</p>
+                  <div className="relative flex flex-col items-center justify-center bg-[#0b0b33] py-8">
+                    <div className="absolute -top-7 size-15 overflow-hidden rounded-full">
+                      <Image
+                        src={imageUrl}
+                        alt={item.name || 'testimonial image'}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+
+                    <p className="mt-4 font-medium text-white">{item.name}</p>
+                  </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          )
-        })}
+              </SwiperSlide>
+            )
+          })}
       </Swiper>
     </div>
   )

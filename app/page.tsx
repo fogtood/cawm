@@ -8,28 +8,12 @@ import { Button } from '@/components/ui/button'
 import { PlayIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { clientFetch } from '@/lib/sanity.client'
-import {
-  homePageQuery,
-  homeSermonsQuery,
-  homeServicesQuery,
-  homeUpcomingEventsQuery,
-  testimonialsQuery,
-  valuesQuery,
-} from '@/lib/sanity.queries'
 import { urlFor } from '@/lib/sanity.image'
-import { Event, HomePage, Sermon, Service, Testimonial, Values } from '@/sanity.types'
+import { fetchHomePageData } from '@/lib/actions'
 
 export default async function Home() {
   // Fetch data from Sanity
-  const [homePage, sermons, services, values, events, testimonials] = await Promise.all([
-    clientFetch<HomePage | null>(homePageQuery).catch(() => null),
-    clientFetch<Sermon[]>(homeSermonsQuery).catch(() => []),
-    clientFetch<Service[]>(homeServicesQuery).catch(() => []),
-    clientFetch<Values>(valuesQuery).catch(() => null),
-    clientFetch<Event[]>(homeUpcomingEventsQuery).catch(() => []),
-    clientFetch<Testimonial[]>(testimonialsQuery).catch(() => []),
-  ])
+  const { homePage, sermons, services, values, events, testimonials } = await fetchHomePageData()
 
   const valueKeys = ['mission', 'vision', 'belief'] as const
 

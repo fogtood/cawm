@@ -4,6 +4,7 @@ import './globals.css'
 import Navbar from '@/components/layout/navbar'
 import Footer from '@/components/layout/footer'
 import AOSInit from '@/components/common/aos-init'
+import { SanityLive } from '@/sanity/live'
 
 const clashDisplay = localFont({
   src: [
@@ -50,6 +51,7 @@ export default function RootLayout({
           <section className="flex-1">{children}</section>
           <Footer />
         </div>
+        <SanityLive />
       </body>
     </html>
   )
