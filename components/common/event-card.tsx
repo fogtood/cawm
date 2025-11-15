@@ -2,21 +2,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Button } from '../ui/button'
 import { urlFor } from '@/lib/sanity.image'
+import { Event } from '@/sanity.types'
 
-interface EventCardProps {
-  _id: string
-  title: string
-  slug: { current: string }
-  description?: string
-  image?: any
-  date?: string
-  endDate?: string
-  location?: string
-  eventType?: string
-  isUpcoming?: boolean
-}
-
-const EventCard = ({ title, slug, description, image }: EventCardProps) => {
+const EventCard = ({ title, slug, description, image }: Event) => {
   const imageUrl = image ? urlFor(image).width(400).height(250).url() : '/images/event.png'
 
   return (
@@ -24,7 +12,7 @@ const EventCard = ({ title, slug, description, image }: EventCardProps) => {
       <div className="relative h-46 w-full overflow-hidden rounded-lg">
         <Image
           src={imageUrl}
-          alt={title}
+          alt={title || 'event image'}
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 400px"
@@ -35,7 +23,7 @@ const EventCard = ({ title, slug, description, image }: EventCardProps) => {
         <h3 className="text-lg font-semibold">{title}</h3>
         {description && <p className="my-2 line-clamp-3">{description}</p>}
         <Button variant="link" className="px-0 text-[#161C2D]" asChild>
-          <Link href={`/events/${slug.current}`}>Learn More</Link>
+          <Link href={`/events/${slug?.current}`}>Learn More</Link>
         </Button>
       </div>
     </div>

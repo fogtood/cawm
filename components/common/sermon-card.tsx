@@ -3,32 +3,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/lib/sanity.image'
 import { extractDateAndTime } from '@/lib/utils'
+import { Sermon } from '@/sanity.types'
 
-interface SermonCardProps {
-  _id: string
-  title: string
-  slug: { current: string }
-  preacher?: string
-  dateTime?: string
-  description?: string
-  image?: any
-  videoUrl?: string
-  audioUrl?: string
-  category?: string
-}
-
-const SermonCard = ({ title, slug, preacher, dateTime, description, image }: SermonCardProps) => {
+const SermonCard = ({ title, slug, preacher, dateTime, description, image }: Sermon) => {
   const imageUrl = image ? urlFor(image).width(400).height(300).url() : '/images/sermon.png'
 
   const { date, time } = extractDateAndTime(dateTime)
 
   return (
-    <Link href={`/sermons/${slug.current}`}>
+    <Link href={`/sermons/${slug?.current}`}>
       <div className="w-full max-w-sm overflow-hidden rounded-md shadow-md blur-out-md">
         <div className="relative h-48 w-full">
           <Image
             src={imageUrl}
-            alt={title}
+            alt={title || 'sermon image'}
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 400px"

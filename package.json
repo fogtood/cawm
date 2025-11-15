@@ -9,6 +9,7 @@
     "lint": "eslint",
     "sanity": "sanity dev --port 3333",
     "sanity:deploy": "sanity deploy",
+    "extract": "sanity schema extract --path=./schema.json",
     "typegen": "sanity typegen generate"
   },
   "dependencies": {
@@ -47,6 +48,8 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@sanity/codegen": "^4.15.0",
+    "@sanity/schema": "^4.15.0",
     "@tailwindcss/postcss": "^4",
     "@types/aos": "^3.0.7",
     "@types/isotope-layout": "^3.0.15",

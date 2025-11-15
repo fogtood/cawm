@@ -1,20 +1,9 @@
 import { Clock, MapPin } from 'lucide-react'
 import Image from 'next/image'
 import { urlFor } from '@/lib/sanity.image'
+import { Service } from '@/sanity.types'
 
-interface ServiceCardProps {
-  _id: string
-  title: string
-  location?: string
-  image?: any
-  schedule?: {
-    day?: string
-    time?: string
-  }
-  order?: number
-}
-
-const ServiceCard = ({ title, location, image, schedule }: ServiceCardProps) => {
+const ServiceCard = ({ title, location, image, schedule }: Service) => {
   const imageUrl = image ? urlFor(image).width(400).height(200).url() : '/images/services.png'
 
   return (
@@ -22,7 +11,7 @@ const ServiceCard = ({ title, location, image, schedule }: ServiceCardProps) => 
       <div className="relative h-48 w-full">
         <Image
           src={imageUrl}
-          alt={title}
+          alt={title || 'service card'}
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 400px"

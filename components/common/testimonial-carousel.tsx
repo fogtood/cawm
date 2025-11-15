@@ -4,21 +4,9 @@ import Image from 'next/image'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
 import { urlFor } from '@/lib/sanity.image'
+import { Testimonial } from '@/sanity.types'
 
-interface Testimonial {
-  _id: string
-  name: string
-  role?: string
-  testimony: string
-  image?: any
-  order?: number
-}
-
-interface TestimonialCarouselProps {
-  testimonials: Testimonial[]
-}
-
-const TestimonialCarousel = ({ testimonials }: TestimonialCarouselProps) => {
+const TestimonialCarousel = ({ testimonials }: { testimonials: Testimonial[] }) => {
   if (!testimonials || testimonials.length === 0) {
     return null
   }
@@ -56,7 +44,12 @@ const TestimonialCarousel = ({ testimonials }: TestimonialCarouselProps) => {
 
                 <div className="relative flex flex-col items-center justify-center bg-[#0b0b33] py-8">
                   <div className="absolute -top-7 size-15 overflow-hidden rounded-full">
-                    <Image src={imageUrl} alt={item.name} fill className="object-cover" />
+                    <Image
+                      src={imageUrl}
+                      alt={item.name || 'testimonial image'}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
 
                   <p className="mt-4 font-medium text-white">{item.name}</p>

@@ -1,12 +1,6 @@
 import Image from 'next/image'
 
-interface MissionCardProps {
-  title: string
-  description: string
-  icon?: string
-}
-
-const MissionCard = ({ title, description, icon }: MissionCardProps) => {
+const MissionCard = ({ title, description }: { title?: string; description?: string }) => {
   return (
     <div className="min-h-[300px] max-w-sm rounded-sm bg-[#F3F3FF] p-6">
       <div className="mb-4 inline-flex items-center justify-center rounded-lg bg-[#0b0b33] p-3">

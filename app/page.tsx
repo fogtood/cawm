@@ -17,8 +17,8 @@ import {
   testimonialsQuery,
   valuesQuery,
 } from '@/lib/sanity.queries'
-import type { Sermon, Service, Event, Testimonial, HomePage } from '@/lib/sanity.types'
 import { urlFor } from '@/lib/sanity.image'
+import { Event, HomePage, Sermon, Service, Testimonial, Values } from '@/sanity.types'
 
 export default async function Home() {
   // Fetch data from Sanity
@@ -26,10 +26,22 @@ export default async function Home() {
     clientFetch<HomePage | null>(homePageQuery).catch(() => null),
     clientFetch<Sermon[]>(homeSermonsQuery).catch(() => []),
     clientFetch<Service[]>(homeServicesQuery).catch(() => []),
-    clientFetch<any>(valuesQuery).catch(() => null),
+    clientFetch<Values>(valuesQuery).catch(() => null),
     clientFetch<Event[]>(homeUpcomingEventsQuery).catch(() => []),
     clientFetch<Testimonial[]>(testimonialsQuery).catch(() => []),
   ])
+
+  const valueKeys = ['mission', 'vision', 'belief'] as const
+
+  const items = values
+    ? valueKeys.map((key) => ({
+        key,
+        data: values[key] || null,
+      }))
+    : Array.from({ length: 3 }).map(() => ({
+        key: crypto.randomUUID(),
+        data: null,
+      }))
 
   return (
     <div>
@@ -174,39 +186,22 @@ export default async function Home() {
 
         {/* Mission section */}
         <div className="my-20 grid grid-cols-1 place-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {values
-            ? ['mission', 'vision', 'belief'].map((key, idx) => {
-                const valueItem = values[key]
-                if (!valueItem) return null
-                return (
-                  <div
-                    key={key}
-                    data-aos="fade-up"
-                    data-aos-delay={idx * 100}
-                    data-aos-duration="800"
-                  >
-                    <MissionCard
-                      title={valueItem.title}
-                      description={valueItem.description}
-                      icon={valueItem.icon}
-                    />
-                  </div>
-                )
-              })
-            : // Fallback if no missions
-              [...Array(3)].map((_, idx) => (
-                <div
-                  key={idx}
-                  data-aos="fade-up"
-                  data-aos-delay={idx * 100}
-                  data-aos-duration="800"
-                >
-                  <MissionCard
-                    title="Mission Statement"
-                    description="Lorem ipsum dolor sit amet consectetur. Erat sapien quis aliquet in nunc lobortis condimentum. Id urna consectetur amet quam aliquam."
-                  />
-                </div>
-              ))}
+          {items.map((item, idx) => (
+            <div
+              key={item.key}
+              data-aos="fade-up"
+              data-aos-delay={idx * 100}
+              data-aos-duration="800"
+            >
+              <MissionCard
+                title={item.data?.title ?? 'Mission Statement'}
+                description={
+                  item.data?.description ??
+                  'Lorem ipsum dolor sit amet consectetur. Erat sapien quis aliquet in nunc lobortis condimentum.'
+                }
+              />
+            </div>
+          ))}
         </div>
       </section>
 
@@ -405,7 +400,7 @@ export default async function Home() {
 
           {/* Cards grid */}
           <div className="mt-8" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
-            <TestimonialCarousel testimonials={testimonials || []} />
+            <TestimonialCarousel testimonials={testimonials ?? []} />
           </div>
         </div>
       </section>
