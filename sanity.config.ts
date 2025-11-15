@@ -12,7 +12,23 @@ export default defineConfig({
 
   basePath: '/studio',
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [
+    structureTool({
+      structure: (S) =>
+        S.list()
+          .title('Content')
+          .items([
+            S.listItem()
+              .title('Home Page')
+              .child(S.document().schemaType('homePage').documentId('homePage')),
+            S.divider(),
+            ...S.documentTypeListItems().filter(
+              (listItem) => !['homePage'].includes(listItem.getId()!)
+            ),
+          ]),
+    }),
+    visionTool(),
+  ],
 
   schema: {
     types: schemaTypes,

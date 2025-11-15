@@ -1,39 +1,28 @@
 'use client'
 
 import Image from 'next/image'
-import { Card, CardContent } from '@/components/ui/card'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Navigation, Pagination } from 'swiper/modules'
+import { urlFor } from '@/lib/sanity.image'
 
-const testimonials = [
-  {
-    text: 'Lorem ipsum dolor sit amet consectetur. Elit sociis consequat venenatis justo sed aenean amet lacus.',
-    name: 'Ayomide Bayo',
-    image: '/images/hero.png',
-  },
-  {
-    text: 'Lorem ipsum dolor sit amet consectetur. Elit sociis consequat venenatis justo sed aenean amet lacus.',
-    name: 'Ayomide Bayo',
-    image: '/images/hero.png',
-  },
-  {
-    text: 'Lorem ipsum dolor sit amet consectetur. Elit sociis consequat venenatis justo sed aenean amet lacus.',
-    name: 'Ayomide Bayo',
-    image: '/images/hero.png',
-  },
-  {
-    text: 'Lorem ipsum dolor sit amet consectetur. Elit sociis consequat venenatis justo sed aenean amet lacus.',
-    name: 'Ayomide Bayo',
-    image: '/images/hero.png',
-  },
-  {
-    text: 'Lorem ipsum dolor sit amet consectetur. Elit sociis consequat venenatis justo sed aenean amet lacus.',
-    name: 'Ayomide Bayo',
-    image: '/images/hero.png',
-  },
-]
+interface Testimonial {
+  _id: string
+  name: string
+  role?: string
+  testimony: string
+  image?: any
+  order?: number
+}
 
-const TestimonialCarousel = () => {
+interface TestimonialCarouselProps {
+  testimonials: Testimonial[]
+}
+
+const TestimonialCarousel = ({ testimonials }: TestimonialCarouselProps) => {
+  if (!testimonials || testimonials.length === 0) {
+    return null
+  }
+
   return (
     <div className="w-full">
       <Swiper
@@ -53,25 +42,29 @@ const TestimonialCarousel = () => {
         }}
         className="pb-[60px]"
       >
-        {testimonials.map((item, index) => (
-          <SwiperSlide key={index}>
-            <Card className="rounded-none border-none bg-[#F3F3FF] p-0 shadow-none">
-              <CardContent className="flex h-full flex-col justify-between p-0 text-[#000000]">
-                <div className="flex flex-col items-start p-6">
-                  <p className="mb-3 font-serif text-4xl">“</p>
-                  <p className="text-sm leading-relaxed">{item.text}</p>
+        {testimonials.map((item) => {
+          const imageUrl = item.image
+            ? urlFor(item.image).width(56).height(56).url()
+            : '/images/hero.png'
+          return (
+            <SwiperSlide key={item._id} className="h-full">
+              <div className="flex h-full min-h-[350px] flex-col rounded-none bg-[#F3F3FF] p-0 shadow-none">
+                <div className="flex flex-1 flex-col items-start p-6">
+                  <p className="font-serif text-5xl leading-none">“</p>
+                  <p className="line-clamp-6 text-sm leading-relaxed">{item.testimony}</p>
                 </div>
 
-                <div className="mt-6 flex flex-col items-center justify-center bg-[#0b0b33] pt-16 pb-4">
-                  <div className="relative -mt-24 h-14 w-14 overflow-hidden rounded-full border-2 border-white">
-                    <Image src={item.image} alt={item.name} fill className="object-cover" />
+                <div className="relative flex flex-col items-center justify-center bg-[#0b0b33] py-8">
+                  <div className="absolute -top-7 size-15 overflow-hidden rounded-full">
+                    <Image src={imageUrl} alt={item.name} fill className="object-cover" />
                   </div>
-                  <p className="mt-2 font-medium text-white">{item.name}</p>
+
+                  <p className="mt-4 font-medium text-white">{item.name}</p>
                 </div>
-              </CardContent>
-            </Card>
-          </SwiperSlide>
-        ))}
+              </div>
+            </SwiperSlide>
+          )
+        })}
       </Swiper>
     </div>
   )

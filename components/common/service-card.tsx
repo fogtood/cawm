@@ -1,13 +1,28 @@
 import { Clock, MapPin } from 'lucide-react'
 import Image from 'next/image'
+import { urlFor } from '@/lib/sanity.image'
 
-const ServiceCard = () => {
+interface ServiceCardProps {
+  _id: string
+  title: string
+  location?: string
+  image?: any
+  schedule?: {
+    day?: string
+    time?: string
+  }
+  order?: number
+}
+
+const ServiceCard = ({ title, location, image, schedule }: ServiceCardProps) => {
+  const imageUrl = image ? urlFor(image).width(400).height(200).url() : '/images/services.png'
+
   return (
     <div className="w-full max-w-sm overflow-hidden rounded-sm">
       <div className="relative h-48 w-full">
         <Image
-          src="/images/services.png"
-          alt="service"
+          src={imageUrl}
+          alt={title}
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 400px"
@@ -15,18 +30,25 @@ const ServiceCard = () => {
         />
       </div>
 
-      <div className="bg-[#161C2D] p-5 text-[#FFFFFF]">
-        <h3 className="mb-3 text-lg font-semibold">Mid-Week Service</h3>
+      <div className="bg-[#161C2D] p-6 text-[#FFFFFF]">
+        <h3 className="mb-5 text-lg font-semibold">{title}</h3>
 
-        <div className="mb-2 flex items-center gap-2 text-sm">
-          <Clock size={18} />
-          <span>12:00 PM</span>
-        </div>
+        {schedule?.time && (
+          <div className="mb-3 flex items-center gap-2 text-sm">
+            <Clock size={18} />
+            <span>
+              {schedule.day ? `${schedule.day}, ` : ''}
+              {schedule.time}
+            </span>
+          </div>
+        )}
 
-        <div className="flex items-start gap-2 text-sm">
-          <MapPin size={18} className="mt-0.5 shrink-0" />
-          <p>The Great Lorem ipsum dolor sit amet consectetur. Erat sapien qu.</p>
-        </div>
+        {location && (
+          <div className="flex items-start gap-2 text-sm">
+            <MapPin size={18} className="mt-0.5 shrink-0" />
+            <p className="line-clamp-2">{location}</p>
+          </div>
+        )}
       </div>
     </div>
   )

@@ -6,7 +6,7 @@ export const sermonsQuery = groq`*[_type == "sermon"] | order(date desc) {
   title,
   slug,
   preacher,
-  date,
+  dateTime,
   description,
   image,
   videoUrl,
@@ -19,7 +19,7 @@ export const sermonBySlugQuery = groq`*[_type == "sermon" && slug.current == $sl
   title,
   slug,
   preacher,
-  date,
+  dateTime,
   description,
   image,
   videoUrl,
@@ -70,7 +70,7 @@ export const eventBySlugQuery = groq`*[_type == "event" && slug.current == $slug
 export const servicesQuery = groq`*[_type == "service"] | order(order asc) {
   _id,
   title,
-  description,
+  location,
   image,
   schedule,
   order
@@ -85,6 +85,14 @@ export const missionsQuery = groq`*[_type == "mission"] | order(order asc) {
   order
 }`
 
+// Value queries
+export const valuesQuery = groq`*[_type == "values"][0] {
+  _id,
+  mission,
+  vision,
+  belief
+}`
+
 // Testimonial queries
 export const testimonialsQuery = groq`*[_type == "testimonial"] | order(order asc) {
   _id,
@@ -95,3 +103,98 @@ export const testimonialsQuery = groq`*[_type == "testimonial"] | order(order as
   order
 }`
 
+// Home page queries (limited results)
+export const homeSermonsQuery = groq`*[_type == "sermon"] | order(date desc) [0...4] {
+  _id,
+  title,
+  slug,
+  preacher,
+  dateTime,
+  description,
+  image,
+  videoUrl,
+  audioUrl,
+  category
+}`
+
+export const homeServicesQuery = groq`*[_type == "service"] | order(order asc) [0...3] {
+  _id,
+  title,
+  description,
+  location,
+  image,
+  schedule,
+  order
+}`
+
+export const homeMissionsQuery = groq`*[_type == "mission"] | order(order asc) [0...3] {
+  _id,
+  title,
+  description,
+  icon,
+  order
+}`
+
+export const homeUpcomingEventsQuery = groq`*[_type == "event" && isUpcoming == true] | order(date asc) [0...4] {
+  _id,
+  title,
+  slug,
+  description,
+  image,
+  date,
+  endDate,
+  location,
+  eventType
+}`
+
+// Home page content query
+export const homePageQuery = groq`*[_type == "homePage"][0] {
+  _id,
+  title,
+  hero {
+    title,
+    subtitle,
+    backgroundImage,
+    primaryButton {
+      text,
+      link
+    },
+    secondaryButton {
+      text,
+      link
+    }
+  },
+  welcome {
+    heading,
+    title,
+    description,
+    image,
+    buttonText,
+    buttonLink
+  },
+  sermonsSection {
+    title,
+    description,
+    buttonText,
+    buttonLink
+  },
+  servicesSection {
+    title,
+    description
+  },
+  liveProgram {
+    title,
+    description,
+    youtubeVideoId
+  },
+  eventsSection {
+    title,
+    description,
+    buttonText,
+    buttonLink
+  },
+  testimonialsSection {
+    title,
+    description
+  }
+}`

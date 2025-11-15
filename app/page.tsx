@@ -8,14 +8,45 @@ import { Button } from '@/components/ui/button'
 import { PlayIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { clientFetch } from '@/lib/sanity.client'
+import {
+  homePageQuery,
+  homeSermonsQuery,
+  homeServicesQuery,
+  homeUpcomingEventsQuery,
+  testimonialsQuery,
+  valuesQuery,
+} from '@/lib/sanity.queries'
+import type { Sermon, Service, Event, Testimonial, HomePage } from '@/lib/sanity.types'
+import { urlFor } from '@/lib/sanity.image'
 
-export default function Home() {
+export default async function Home() {
+  // Fetch data from Sanity
+  const [homePage, sermons, services, values, events, testimonials] = await Promise.all([
+    clientFetch<HomePage | null>(homePageQuery).catch(() => null),
+    clientFetch<Sermon[]>(homeSermonsQuery).catch(() => []),
+    clientFetch<Service[]>(homeServicesQuery).catch(() => []),
+    clientFetch<any>(valuesQuery).catch(() => null),
+    clientFetch<Event[]>(homeUpcomingEventsQuery).catch(() => []),
+    clientFetch<Testimonial[]>(testimonialsQuery).catch(() => []),
+  ])
+
   return (
     <div>
       {/* Hero section */}
       <div className="relative h-screen w-full">
         {/* Background image */}
-        <Image src="/images/hero.png" alt="Background" fill priority className="object-cover" />
+        {homePage?.hero?.backgroundImage ? (
+          <Image
+            src={urlFor(homePage.hero.backgroundImage).width(1920).height(1080).url()}
+            alt="Background"
+            fill
+            priority
+            className="object-cover"
+          />
+        ) : (
+          <Image src="/images/hero.png" alt="Background" fill priority className="object-cover" />
+        )}
 
         {/* Gradient overlays */}
         {/* Top-to-bottom gradient */}
@@ -28,12 +59,13 @@ export default function Home() {
         <div className="absolute inset-0 mx-auto flex max-w-6xl flex-col items-center justify-center gap-6 px-4 text-center sm:gap-8">
           <div className="text-white" data-aos="fade-up" data-aos-duration="1000">
             <h1 className="text-4xl font-bold tracking-wider sm:text-5xl md:text-6xl">
-              Christ Apostolic World Ministry
+              {homePage?.hero?.title || 'Christ Apostolic World Ministry'}
             </h1>
-            <p className="mx-auto mt-3 max-w-4xl text-lg leading-relaxed font-normal sm:text-xl">
-              Lorem ipsum dolor sit amet consectetur. Leo in sed magna sapien purus augue duis. Id
-              imperdiet a tristique quam ultrices ti
-            </p>
+            {homePage?.hero?.subtitle && (
+              <p className="mx-auto mt-3 max-w-4xl text-lg leading-relaxed font-normal sm:text-xl">
+                {homePage.hero.subtitle}
+              </p>
+            )}
           </div>
           <div
             className="flex flex-wrap items-center justify-center gap-5"
@@ -41,19 +73,46 @@ export default function Home() {
             data-aos-delay="200"
             data-aos-duration="1000"
           >
-            <Button
-              size="icon"
-              className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-2 text-base font-normal sm:px-8 sm:py-3 sm:text-lg md:px-10 md:py-4 md:text-xl"
-            >
-              <PlayIcon fill="white" />
-              Watch Live
-            </Button>
-            <Button
-              variant="outline"
-              className="h-auto w-auto cursor-pointer rounded-sm border-[#FFFFFF4D] bg-[#FFFFFF1A]! px-6 py-2 text-base font-normal text-white! sm:px-8 sm:py-3 sm:text-lg md:px-10 md:py-4 md:text-xl"
-            >
-              I&apos;m New Here
-            </Button>
+            {homePage?.hero?.primaryButton?.text &&
+              (homePage.hero.primaryButton.link ? (
+                <Button
+                  size="icon"
+                  className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-2 text-base font-normal sm:px-8 sm:py-3 sm:text-lg md:px-10 md:py-4 md:text-xl"
+                  asChild
+                >
+                  <Link href={homePage.hero.primaryButton.link}>
+                    <PlayIcon fill="white" />
+                    {homePage.hero.primaryButton.text}
+                  </Link>
+                </Button>
+              ) : (
+                <Button
+                  size="icon"
+                  className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-2 text-base font-normal sm:px-8 sm:py-3 sm:text-lg md:px-10 md:py-4 md:text-xl"
+                >
+                  <PlayIcon fill="white" />
+                  {homePage.hero.primaryButton.text}
+                </Button>
+              ))}
+            {homePage?.hero?.secondaryButton?.text &&
+              (homePage.hero.secondaryButton.link ? (
+                <Button
+                  variant="outline"
+                  className="h-auto w-auto cursor-pointer rounded-sm border-[#FFFFFF4D] bg-[#FFFFFF1A]! px-6 py-2 text-base font-normal text-white! sm:px-8 sm:py-3 sm:text-lg md:px-10 md:py-4 md:text-xl"
+                  asChild
+                >
+                  <Link href={homePage.hero.secondaryButton.link}>
+                    {homePage.hero.secondaryButton.text}
+                  </Link>
+                </Button>
+              ) : (
+                <Button
+                  variant="outline"
+                  className="h-auto w-auto cursor-pointer rounded-sm border-[#FFFFFF4D] bg-[#FFFFFF1A]! px-6 py-2 text-base font-normal text-white! sm:px-8 sm:py-3 sm:text-lg md:px-10 md:py-4 md:text-xl"
+                >
+                  {homePage.hero.secondaryButton.text}
+                </Button>
+              ))}
           </div>
         </div>
       </div>
@@ -66,7 +125,16 @@ export default function Home() {
             data-aos="fade-right"
             data-aos-duration="800"
           >
-            <Image src="/images/welcome.png" alt="Welcome" fill className="object-cover" />
+            {homePage?.welcome?.image ? (
+              <Image
+                src={urlFor(homePage.welcome.image).width(800).height(600).url()}
+                alt={homePage.welcome.title || 'Welcome'}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <Image src="/images/welcome.png" alt="Welcome" fill className="object-cover" />
+            )}
           </div>
 
           <div
@@ -74,34 +142,71 @@ export default function Home() {
             data-aos="fade-left"
             data-aos-duration="800"
           >
-            <p className="text-xl leading-10 font-medium tracking-wide">You are welcome to</p>
-            <h2 className="text-2xl font-semibold tracking-wide uppercase md:text-3xl">
-              Christ Apostolic World Ministry
-            </h2>
-            <p className="my-4 line-clamp-6 leading-relaxed text-[#575756] md:text-lg">
-              Lorem ipsum dolor sit amet consectetur. Leo in sed magna sapien purus augue duis. Id
-              imperdiet a tristique quam ultrices tincidunt suspendisse nec mauris. Diam amet
-              ullamcorper sed sed a sapien. Tincidunt tellus bibendum proin pharetra est in et
-              sagittis. Ut massa est vitae eget magna id. Parturient diam ut viverra nibh lacus
-              imperdiet cursus. Pellentesque elementum risus id blandit morbi elit praesent. Mattis
-              volutpat ut risus blandit nulla. Praesent sapien semper at adipiscing
-            </p>
-            <Button
-              className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-3 text-base font-normal"
-              asChild
-            >
-              <Link href="/about">Know More</Link>
-            </Button>
+            {homePage?.welcome?.heading && (
+              <p className="text-xl leading-10 font-medium tracking-wide">
+                {homePage.welcome.heading}
+              </p>
+            )}
+            {homePage?.welcome?.title && (
+              <h2 className="text-2xl font-semibold tracking-wide uppercase md:text-3xl">
+                {homePage.welcome.title}
+              </h2>
+            )}
+            {homePage?.welcome?.description && (
+              <p className="my-4 line-clamp-6 leading-relaxed text-[#575756] md:text-lg">
+                {homePage.welcome.description}
+              </p>
+            )}
+            {homePage?.welcome?.buttonText && (
+              <Button
+                className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-3 text-base font-normal"
+                asChild={!!homePage.welcome.buttonLink}
+              >
+                {homePage.welcome.buttonLink ? (
+                  <Link href={homePage.welcome.buttonLink}>{homePage.welcome.buttonText}</Link>
+                ) : (
+                  homePage.welcome.buttonText
+                )}
+              </Button>
+            )}
           </div>
         </div>
 
         {/* Mission section */}
         <div className="my-20 grid grid-cols-1 place-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[...Array(3)].map((_, idx) => (
-            <div key={idx} data-aos="fade-up" data-aos-delay={idx * 100} data-aos-duration="800">
-              <MissionCard />
-            </div>
-          ))}
+          {values
+            ? ['mission', 'vision', 'belief'].map((key, idx) => {
+                const valueItem = values[key]
+                if (!valueItem) return null
+                return (
+                  <div
+                    key={key}
+                    data-aos="fade-up"
+                    data-aos-delay={idx * 100}
+                    data-aos-duration="800"
+                  >
+                    <MissionCard
+                      title={valueItem.title}
+                      description={valueItem.description}
+                      icon={valueItem.icon}
+                    />
+                  </div>
+                )
+              })
+            : // Fallback if no missions
+              [...Array(3)].map((_, idx) => (
+                <div
+                  key={idx}
+                  data-aos="fade-up"
+                  data-aos-delay={idx * 100}
+                  data-aos-duration="800"
+                >
+                  <MissionCard
+                    title="Mission Statement"
+                    description="Lorem ipsum dolor sit amet consectetur. Erat sapien quis aliquet in nunc lobortis condimentum. Id urna consectetur amet quam aliquam."
+                  />
+                </div>
+              ))}
         </div>
       </section>
 
@@ -109,37 +214,53 @@ export default function Home() {
       <section className="container mx-auto my-20 px-4 md:px-6">
         <div className="my-30">
           <div
-            className="flex flex-wrap items-center justify-center gap-5 md:justify-between"
+            className="flex flex-wrap items-center justify-center gap-5 sm:justify-between"
             data-aos="fade-up"
             data-aos-duration="800"
           >
-            <div className="space-y-1 text-center text-[#1A1A1A] md:text-left">
-              <h1 className="text-2xl font-semibold">Our Sermons</h1>
-              <p>Dive into our collection of powerful sermons and series.</p>
+            <div className="space-y-1 text-center text-[#1A1A1A] sm:text-left">
+              <h1 className="text-2xl font-semibold">
+                {homePage?.sermonsSection?.title || 'Our Sermons'}
+              </h1>
+              <p>
+                {homePage?.sermonsSection?.description ||
+                  'Dive into our collection of powerful sermons and series.'}
+              </p>
             </div>
-            <Button
-              className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-3 text-base font-normal"
-              asChild
-            >
-              <Link href="/sermons">Explore Sermons</Link>
-            </Button>
+            {homePage?.sermonsSection?.buttonText && (
+              <Button
+                className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-3 text-base font-normal"
+                asChild={!!homePage.sermonsSection.buttonLink}
+              >
+                {homePage.sermonsSection.buttonLink ? (
+                  <Link href={homePage.sermonsSection.buttonLink}>
+                    {homePage.sermonsSection.buttonText}
+                  </Link>
+                ) : (
+                  homePage.sermonsSection.buttonText
+                )}
+              </Button>
+            )}
           </div>
 
           {/* Cards grid */}
           <div className="mt-8 grid grid-cols-1 place-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {/* SermonCard components would be mapped here */}
-            <div data-aos="zoom-in" data-aos-delay="0" data-aos-duration="800">
-              <SermonCard />
-            </div>
-            <div data-aos="zoom-in" data-aos-delay="100" data-aos-duration="800">
-              <SermonCard />
-            </div>
-            <div data-aos="zoom-in" data-aos-delay="200" data-aos-duration="800">
-              <SermonCard />
-            </div>
-            <div data-aos="zoom-in" data-aos-delay="300" data-aos-duration="800">
-              <SermonCard />
-            </div>
+            {sermons && sermons.length > 0 ? (
+              sermons.map((sermon, idx) => (
+                <div
+                  key={sermon._id}
+                  data-aos="zoom-in"
+                  data-aos-delay={idx * 100}
+                  data-aos-duration="800"
+                  className="w-full max-w-sm"
+                >
+                  <SermonCard {...sermon} />
+                </div>
+              ))
+            ) : (
+              // Fallback if no sermons
+              <p className="col-span-full text-center text-[#575756]">No sermons available yet.</p>
+            )}
           </div>
         </div>
       </section>
@@ -152,22 +273,33 @@ export default function Home() {
             data-aos="fade-up"
             data-aos-duration="800"
           >
-            <h1 className="text-2xl font-semibold">Our Services</h1>
-            <p>Lorem ipsum dolor sit amet consectetur. Leo in sed magna sap.</p>
+            <h1 className="text-2xl font-semibold">
+              {homePage?.servicesSection?.title || 'Our Services'}
+            </h1>
+            <p>
+              {homePage?.servicesSection?.description ||
+                'Lorem ipsum dolor sit amet consectetur. Leo in sed magna sap.'}
+            </p>
           </div>
 
           {/* Cards grid */}
           <div className="mt-8 grid grid-cols-1 place-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {/* EventCard components would be mapped here */}
-            <div data-aos="fade-up" data-aos-delay="0" data-aos-duration="800">
-              <ServiceCard />
-            </div>
-            <div data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
-              <ServiceCard />
-            </div>
-            <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
-              <ServiceCard />
-            </div>
+            {services && services.length > 0 ? (
+              services.map((service, idx) => (
+                <div
+                  key={service._id}
+                  data-aos="fade-up"
+                  data-aos-delay={idx * 100}
+                  data-aos-duration="800"
+                  className="w-full max-w-sm"
+                >
+                  <ServiceCard {...service} />
+                </div>
+              ))
+            ) : (
+              // Fallback if no services
+              <p className="col-span-full text-center text-[#575756]">No services available yet.</p>
+            )}
           </div>
         </div>
       </div>
@@ -176,23 +308,26 @@ export default function Home() {
         {/* Live program section */}
         <div>
           <div className="text-center" data-aos="fade-up" data-aos-duration="800">
-            <h3 className="text-2xl font-semibold text-[#212120]">
-              Tune in to our
-              <span>
-                <Image
-                  src="/images/youtube.svg"
-                  alt="YouTube"
-                  width={24}
-                  height={24}
-                  className="ml-2 inline-block"
-                />
-              </span>
-              LIVE program
-            </h3>
-            <p className="mt-1 text-[#575756]">Stay connected to our live streams</p>
+            {homePage?.liveProgram?.title && (
+              <h3 className="text-2xl font-semibold text-[#212120]">
+                {homePage.liveProgram.title}
+                <span>
+                  <Image
+                    src="/images/youtube.svg"
+                    alt="YouTube"
+                    width={24}
+                    height={24}
+                    className="ml-2 inline-block"
+                  />
+                </span>
+              </h3>
+            )}
+            {homePage?.liveProgram?.description && (
+              <p className="mt-1 text-[#575756]">{homePage.liveProgram.description}</p>
+            )}
           </div>
           <div data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
-            <YoutubeEmbed />
+            <YoutubeEmbed videoId={homePage?.liveProgram?.youtubeVideoId} />
           </div>
         </div>
       </section>
@@ -201,37 +336,53 @@ export default function Home() {
       <div className="bg-[#F6F6FF] py-10">
         <div className="container mx-auto px-4 md:px-6">
           <div
-            className="flex flex-wrap items-center justify-center gap-5 md:justify-between"
+            className="flex flex-wrap items-center justify-center gap-5 sm:justify-between"
             data-aos="fade-up"
             data-aos-duration="800"
           >
-            <div className="space-y-1 text-center text-[#1A1A1A] md:text-left">
-              <h1 className="text-2xl font-semibold">Upcoming Events</h1>
-              <p>Join us for our upcoming gatherings and activities</p>
+            <div className="space-y-1 text-center text-[#1A1A1A] sm:text-left">
+              <h1 className="text-2xl font-semibold">
+                {homePage?.eventsSection?.title || 'Upcoming Events'}
+              </h1>
+              <p>
+                {homePage?.eventsSection?.description ||
+                  'Join us for our upcoming gatherings and activities'}
+              </p>
             </div>
-            <Button
-              className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-3 text-base font-normal"
-              asChild
-            >
-              <Link href="/sermons">View All Events</Link>
-            </Button>
+            {homePage?.eventsSection?.buttonText && (
+              <Button
+                className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-3 text-base font-normal"
+                asChild={!!homePage.eventsSection.buttonLink}
+              >
+                {homePage.eventsSection.buttonLink ? (
+                  <Link href={homePage.eventsSection.buttonLink}>
+                    {homePage.eventsSection.buttonText}
+                  </Link>
+                ) : (
+                  homePage.eventsSection.buttonText
+                )}
+              </Button>
+            )}
           </div>
 
           {/* Cards grid */}
           <div className="mt-8 grid grid-cols-1 place-items-center gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {/* EventCard components would be mapped here */}
-            <div data-aos="flip-left" data-aos-delay="0" data-aos-duration="800">
-              <EventCard />
-            </div>
-            <div data-aos="flip-left" data-aos-delay="100" data-aos-duration="800">
-              <EventCard />
-            </div>
-            <div data-aos="flip-left" data-aos-delay="200" data-aos-duration="800">
-              <EventCard />
-            </div>
-            <div data-aos="flip-left" data-aos-delay="300" data-aos-duration="800">
-              <EventCard />
-            </div>
+            {events && events.length > 0 ? (
+              events.map((event, idx) => (
+                <div
+                  key={event._id}
+                  data-aos="flip-left"
+                  data-aos-delay={idx * 100}
+                  data-aos-duration="800"
+                  className="w-full max-w-sm"
+                >
+                  <EventCard {...event} />
+                </div>
+              ))
+            ) : (
+              // Fallback if no events
+              <p className="col-span-full text-center text-[#575756]">No upcoming events yet.</p>
+            )}
           </div>
         </div>
       </div>
@@ -244,13 +395,17 @@ export default function Home() {
             data-aos="fade-up"
             data-aos-duration="800"
           >
-            <h1 className="text-2xl font-semibold">Testimonies</h1>
-            <p>Lorem ipsum dolor sit amet consectetur.</p>
+            <h1 className="text-2xl font-semibold">
+              {homePage?.testimonialsSection?.title || 'Testimonies'}
+            </h1>
+            {homePage?.testimonialsSection?.description && (
+              <p>{homePage.testimonialsSection.description}</p>
+            )}
           </div>
 
           {/* Cards grid */}
           <div className="mt-8" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
-            <TestimonialCarousel />
+            <TestimonialCarousel testimonials={testimonials || []} />
           </div>
         </div>
       </section>

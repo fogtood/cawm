@@ -27,9 +27,9 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'date',
-      title: 'Date',
-      type: 'date',
+      name: 'dateTime',
+      title: 'Date & Time',
+      type: 'datetime',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -77,4 +77,3 @@ export default defineType({
     },
   },
 })
-

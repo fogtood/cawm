@@ -1,15 +1,34 @@
 import { Calendar, Clock, UserIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { urlFor } from '@/lib/sanity.image'
+import { extractDateAndTime } from '@/lib/utils'
 
-const SermonCard = () => {
+interface SermonCardProps {
+  _id: string
+  title: string
+  slug: { current: string }
+  preacher?: string
+  dateTime?: string
+  description?: string
+  image?: any
+  videoUrl?: string
+  audioUrl?: string
+  category?: string
+}
+
+const SermonCard = ({ title, slug, preacher, dateTime, description, image }: SermonCardProps) => {
+  const imageUrl = image ? urlFor(image).width(400).height(300).url() : '/images/sermon.png'
+
+  const { date, time } = extractDateAndTime(dateTime)
+
   return (
-    <Link href="/sermons/dont-escape-engage">
-      <div className="w-full max-w-sm rounded-md shadow-md blur-out-md">
+    <Link href={`/sermons/${slug.current}`}>
+      <div className="w-full max-w-sm overflow-hidden rounded-md shadow-md blur-out-md">
         <div className="relative h-48 w-full">
           <Image
-            src="/images/sermon.png"
-            alt="Sermon"
+            src={imageUrl}
+            alt={title}
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 400px"
@@ -17,21 +36,24 @@ const SermonCard = () => {
           />
         </div>
         <div className="px-4 py-6 text-sm text-[#1A1A1A]">
-          <h3 className="text-lg font-semibold">Don&apos;t Escape, Engage</h3>
-          <p className="my-4 line-clamp-3">
-            In this revelatory teaching, Dr. Flourish Peters challenges the escapist mindset often
-            associate
-          </p>
-          <p className="mb-2 flex items-center gap-2">
-            <UserIcon size={18} /> Dr. Flourish Peters
-          </p>
+          <h3 className="text-lg font-semibold">{title}</h3>
+          {description && <p className="my-4 line-clamp-3">{description}</p>}
+          {preacher && (
+            <p className="mb-2 flex items-center gap-2">
+              <UserIcon size={18} /> {preacher}
+            </p>
+          )}
           <div className="flex items-center justify-between">
-            <p className="flex items-center gap-2">
-              <Clock size={18} /> 90:41
-            </p>
-            <p className="flex items-center gap-2">
-              <Calendar size={18} /> Jun 23, 2025
-            </p>
+            {time && (
+              <p className="flex items-center gap-2">
+                <Clock size={18} /> {time}
+              </p>
+            )}
+            {date && (
+              <p className="flex items-center gap-2">
+                <Calendar size={18} /> {date}
+              </p>
+            )}
           </div>
         </div>
       </div>

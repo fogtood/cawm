@@ -12,9 +12,9 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: 'description',
-      title: 'Description',
-      type: 'text',
+      name: 'location',
+      title: 'Location',
+      type: 'string',
     }),
     defineField({
       name: 'image',
@@ -34,15 +34,7 @@ export default defineType({
           title: 'Day',
           type: 'string',
           options: {
-            list: [
-              'Sunday',
-              'Monday',
-              'Tuesday',
-              'Wednesday',
-              'Thursday',
-              'Friday',
-              'Saturday',
-            ],
+            list: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
           },
         },
         {
@@ -67,4 +59,3 @@ export default defineType({
     },
   },
 })
-

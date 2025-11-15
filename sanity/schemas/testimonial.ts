@@ -20,7 +20,8 @@ export default defineType({
       name: 'testimony',
       title: 'Testimony',
       type: 'text',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) =>
+        Rule.max(300).warning('Keep testimonials concise for better display').required(),
     }),
     defineField({
       name: 'image',
@@ -45,4 +46,3 @@ export default defineType({
     },
   },
 })
-
