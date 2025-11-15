@@ -743,7 +743,7 @@
         },
         "optional": true
       },
-      "videoUrl": {
+      "youtubeVideoId": {
         "type": "objectAttribute",
         "value": {
           "type": "string"

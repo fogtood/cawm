@@ -134,7 +134,7 @@ export type Sermon = {
     crop?: SanityImageCrop
     _type: 'image'
   }
-  videoUrl?: string
+  youtubeVideoId?: string
   audioUrl?: string
   category?: 'sunday-service' | 'bible-study' | 'prayer-meeting' | 'special-service'
 }

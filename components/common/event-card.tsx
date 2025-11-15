@@ -5,7 +5,7 @@ import { urlFor } from '@/lib/sanity.image'
 import { Event } from '@/sanity.types'
 
 const EventCard = ({ title, slug, description, image }: Event) => {
-  const imageUrl = image ? urlFor(image).width(400).height(250).url() : '/images/event.png'
+  const imageUrl = image ? urlFor(image).url() : '/images/event.png'
 
   return (
     <div className="w-full max-w-sm">

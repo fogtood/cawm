@@ -46,9 +46,11 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'videoUrl',
-      title: 'Video URL',
-      type: 'url',
+      name: 'youtubeVideoId',
+      title: 'YouTube Video ID',
+      type: 'string',
+      description:
+        'The video ID from YouTube URL (e.g., from https://www.youtube.com/watch?v=VIDEO_ID)',
     }),
     defineField({
       name: 'audioUrl',

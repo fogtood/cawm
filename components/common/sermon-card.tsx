@@ -6,7 +6,7 @@ import { extractDateAndTime } from '@/lib/utils'
 import { Sermon } from '@/sanity.types'
 
 const SermonCard = ({ title, slug, preacher, dateTime, description, image }: Sermon) => {
-  const imageUrl = image ? urlFor(image).width(400).height(300).url() : '/images/sermon.png'
+  const imageUrl = image ? urlFor(image).url() : '/images/sermon.png'
 
   const { date, time } = extractDateAndTime(dateTime)
 

@@ -9,7 +9,7 @@ export const sermonsQuery = groq`*[_type == "sermon"] | order(date desc) {
   dateTime,
   description,
   image,
-  videoUrl,
+  youtubeVideoId,
   audioUrl,
   category
 }`
@@ -22,7 +22,7 @@ export const sermonBySlugQuery = groq`*[_type == "sermon" && slug.current == $sl
   dateTime,
   description,
   image,
-  videoUrl,
+  youtubeVideoId,
   audioUrl,
   category
 }`
