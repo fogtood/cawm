@@ -5,5 +5,15 @@ import testimonial from './testimonial'
 import homePage from './homePage'
 import value from './value'
 import valueItem from './value-item'
+import aboutPage from './aboutPage'
 
-export const schemaTypes = [homePage, sermon, event, service, value, valueItem, testimonial]
+export const schemaTypes = [
+  homePage,
+  aboutPage,
+  sermon,
+  event,
+  service,
+  value,
+  valueItem,
+  testimonial,
+]

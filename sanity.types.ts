@@ -139,6 +139,59 @@ export type Sermon = {
   category?: 'sunday-service' | 'bible-study' | 'prayer-meeting' | 'special-service'
 }
 
+export type AboutPage = {
+  _id: string
+  _type: 'aboutPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  hero?: {
+    title?: string
+    subtitle?: string
+    backgroundImage?: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    }
+  }
+  aboutSection?: {
+    title?: string
+    aboutText?: string
+  }
+  mission?: string
+  vision?: string
+  leadershipSection?: {
+    title?: string
+    description?: string
+    leadership?: Array<{
+      name?: string
+      position?: string
+      image?: {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+      }
+      _type: 'leader'
+      _key: string
+    }>
+  }
+}
+
 export type HomePage = {
   _id: string
   _type: 'homePage'
@@ -341,6 +394,7 @@ export type AllSanitySchemaTypes =
   | Service
   | Event
   | Sermon
+  | AboutPage
   | HomePage
   | SanityImagePaletteSwatch
   | SanityImagePalette

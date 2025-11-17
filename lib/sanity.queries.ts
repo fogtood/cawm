@@ -198,3 +198,25 @@ export const homePageQuery = groq`*[_type == "homePage"][0] {
     description
   }
 }`
+
+// About Page
+export const aboutPageQuery = groq`*[_type == "aboutPage"][0] {
+  _id,
+  title,
+  hero {
+    title,
+    subtitle,
+    backgroundImage,
+    },
+    aboutSection {
+      title, 
+      aboutText,
+    },
+    mission,
+    vision,
+    leadershipSection {
+      title, 
+      description,
+      leadership
+    }
+}`

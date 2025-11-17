@@ -21,9 +21,12 @@ export default defineConfig({
             S.listItem()
               .title('Home Page')
               .child(S.document().schemaType('homePage').documentId('homePage')),
+            S.listItem()
+              .title('About Page')
+              .child(S.document().schemaType('aboutPage').documentId('aboutPage')),
             S.divider(),
             ...S.documentTypeListItems().filter(
-              (listItem) => !['homePage'].includes(listItem.getId()!)
+              (listItem) => !['homePage', 'aboutPage'].includes(listItem.getId()!)
             ),
           ]),
     }),
