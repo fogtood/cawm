@@ -84,7 +84,7 @@ export default async function About() {
                     alt={leader?.name || 'Leader'}
                     width={320}
                     height={320}
-                    className="object-contain"
+                    className="overflow-hidden rounded-2xl object-contain"
                   />
                   <div className="text-center">
                     <h3 className="text-lg font-semibold text-[#4A4A4A]">

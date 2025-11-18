@@ -24,9 +24,20 @@ export default defineConfig({
             S.listItem()
               .title('About Page')
               .child(S.document().schemaType('aboutPage').documentId('aboutPage')),
+            S.listItem()
+              .title('About Youths Page')
+              .child(S.document().schemaType('aboutYouthsPage').documentId('aboutYouthsPage')),
+            S.listItem()
+              .title('About Ministries Page')
+              .child(
+                S.document().schemaType('aboutMinistriesPage').documentId('aboutMinistriesPage')
+              ),
             S.divider(),
             ...S.documentTypeListItems().filter(
-              (listItem) => !['homePage', 'aboutPage'].includes(listItem.getId()!)
+              (listItem) =>
+                !['homePage', 'aboutPage', 'aboutYouthsPage', 'aboutMinistriesPage'].includes(
+                  listItem.getId()!
+                )
             ),
           ]),
     }),

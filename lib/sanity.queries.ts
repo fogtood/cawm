@@ -220,3 +220,41 @@ export const aboutPageQuery = groq`*[_type == "aboutPage"][0] {
       leadership
     }
 }`
+
+export const aboutYouthsPageQuery = groq`*[_type == "aboutYouthsPage"][0] {
+  _id,
+  title,
+  hero {
+    title,
+    subtitle,
+    backgroundImage,
+    },
+    aboutSection {
+      title, 
+      aboutText,
+    },
+    leadershipSection {
+      title, 
+      description,
+      leadership
+    }
+}`
+
+export const aboutMinistriesPageQuery = groq`*[_type == "aboutMinistriesPage"][0] {
+  _id,
+  title,
+  hero {
+    title,
+    subtitle,
+    backgroundImage,
+    },
+    aboutSection {
+      title, 
+      aboutText,
+    },
+    leadershipSection {
+      title, 
+      description,
+      leadership
+    }
+}`

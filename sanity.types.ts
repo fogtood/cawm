@@ -139,6 +139,108 @@ export type Sermon = {
   category?: 'sunday-service' | 'bible-study' | 'prayer-meeting' | 'special-service'
 }
 
+export type AboutMinistriesPage = {
+  _id: string
+  _type: 'aboutMinistriesPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  hero?: {
+    title?: string
+    subtitle?: string
+    backgroundImage?: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    }
+  }
+  aboutSection?: {
+    title?: string
+    aboutText?: string
+  }
+  leadershipSection?: {
+    title?: string
+    description?: string
+    leadership?: Array<{
+      name?: string
+      position?: string
+      image?: {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+      }
+      _type: 'leader'
+      _key: string
+    }>
+  }
+}
+
+export type AboutYouthsPage = {
+  _id: string
+  _type: 'aboutYouthsPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  hero?: {
+    title?: string
+    subtitle?: string
+    backgroundImage?: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    }
+  }
+  aboutSection?: {
+    title?: string
+    aboutText?: string
+  }
+  leadershipSection?: {
+    title?: string
+    description?: string
+    leadership?: Array<{
+      name?: string
+      position?: string
+      image?: {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+      }
+      _type: 'leader'
+      _key: string
+    }>
+  }
+}
+
 export type AboutPage = {
   _id: string
   _type: 'aboutPage'
@@ -394,6 +496,8 @@ export type AllSanitySchemaTypes =
   | Service
   | Event
   | Sermon
+  | AboutMinistriesPage
+  | AboutYouthsPage
   | AboutPage
   | HomePage
   | SanityImagePaletteSwatch
