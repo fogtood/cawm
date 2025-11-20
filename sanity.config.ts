@@ -32,12 +32,31 @@ export default defineConfig({
               .child(
                 S.document().schemaType('aboutMinistriesPage').documentId('aboutMinistriesPage')
               ),
+            S.listItem()
+              .title('Media Page')
+              .child(S.document().schemaType('mediaPage').documentId('mediaPage')),
+            S.listItem()
+              .title('Events Page')
+              .child(S.document().schemaType('eventsPage').documentId('eventsPage')),
+            S.listItem()
+              .title('Sermons Page')
+              .child(S.document().schemaType('sermonsPage').documentId('sermonsPage')),
+            S.listItem()
+              .title('Contact Page')
+              .child(S.document().schemaType('contactPage').documentId('contactPage')),
             S.divider(),
             ...S.documentTypeListItems().filter(
               (listItem) =>
-                !['homePage', 'aboutPage', 'aboutYouthsPage', 'aboutMinistriesPage'].includes(
-                  listItem.getId()!
-                )
+                ![
+                  'homePage',
+                  'aboutPage',
+                  'aboutYouthsPage',
+                  'aboutMinistriesPage',
+                  'mediaPage',
+                  'eventsPage',
+                  'sermonsPage',
+                  'contactPage',
+                ].includes(listItem.getId()!)
             ),
           ]),
     }),

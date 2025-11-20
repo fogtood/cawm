@@ -93,6 +93,13 @@ export const valuesQuery = groq`*[_type == "values"][0] {
   belief
 }`
 
+export const mediaFolderQuery = groq`*[_type == "mediaFolder"] | order(date desc) {
+  _id,
+  title,
+  date,
+  driveUrl
+}`
+
 // Testimonial queries
 export const testimonialsQuery = groq`*[_type == "testimonial"] | order(order asc) {
   _id,
@@ -257,4 +264,44 @@ export const aboutMinistriesPageQuery = groq`*[_type == "aboutMinistriesPage"][0
       description,
       leadership
     }
+}`
+
+export const mediaPageQuery = groq`*[_type == "mediaPage"][0] {
+  _id,
+  title,
+  hero {
+    title,
+    subtitle,
+    backgroundImage,
+    },
+}`
+
+export const eventsPageQuery = groq`*[_type == "eventsPage"][0] {
+  _id,
+  title,
+  hero {
+    title,
+    subtitle,
+    backgroundImage,
+    },
+}`
+
+export const sermonsPageQuery = groq`*[_type == "sermonsPage"][0] {
+  _id,
+  title,
+  hero {
+    title,
+    subtitle,
+    backgroundImage,
+    },
+}`
+
+export const contactPageQuery = groq`*[_type == "contactPage"][0] {
+  _id,
+  title,
+  hero {
+    title,
+    subtitle,
+    backgroundImage,
+    },
 }`
