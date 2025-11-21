@@ -46,7 +46,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${clashDisplay.className} font-sans antialiased`}>
         <AOSInit />
-        <div className="flex min-h-screen flex-col">
+        <div className="flex min-h-screen flex-col overflow-x-hidden">
           <Navbar />
           <section className="flex-1">{children}</section>
           <Footer />

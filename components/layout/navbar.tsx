@@ -16,7 +16,7 @@ import {
 import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible'
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '../ui/sheet'
+import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from '../ui/sheet'
 // import { useRouter } from 'next/navigation'
 
 interface MenuItem {
@@ -123,8 +123,12 @@ const Navbar = () => {
             </Button>
           </SheetTrigger>
 
-          <SheetContent side="left" className="w-64 px-5 py-10 text-[#262626] md:hidden">
+          <SheetContent
+            side="left"
+            className="w-[240px] px-5 py-10 text-[#262626] sm:w-[300px] md:hidden"
+          >
             <SheetTitle className="sr-only" />
+            <SheetDescription className="sr-only" />
             <nav className="flex flex-col space-y-4">
               {menuItems.map((item) => (
                 <MenuItemComponent key={item.title} item={item} setParentOpen={setOpen} />
