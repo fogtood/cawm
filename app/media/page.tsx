@@ -1,16 +1,28 @@
 import Bg from '@/components/common/bg'
 import { urlFor } from '@/lib/sanity.image'
-import { mediaFolderQuery, mediaPageQuery } from '@/lib/sanity.queries'
+import { mediaFolderQuery, mediaPageQuery, totalFolders } from '@/lib/sanity.queries'
 import type { Media, MediaPage } from '@/sanity.types'
 import { sanityFetch } from '@/sanity/live'
 import Image from 'next/image'
 import Link from 'next/link'
+import { PageParams } from '../events/page'
+import AppPagination from '@/components/common/app-pagination'
 
-export default async function Media() {
-  const { data: mediaPage } = (await sanityFetch({ query: mediaPageQuery })) as {
-    data: MediaPage
-  }
-  const { data: media } = (await sanityFetch({ query: mediaFolderQuery })) as { data: Media[] }
+const ITEMS_PER_PAGE = 12
+
+export default async function Media({ searchParams }: PageParams) {
+  const params = await searchParams
+  const currentPage = Number(params.page) || 1
+  const start = (currentPage - 1) * ITEMS_PER_PAGE
+  const end = start + ITEMS_PER_PAGE
+
+  const [{ data: mediaPage }, { data: totalCount }, { data: media }] = await Promise.all([
+    sanityFetch({ query: mediaPageQuery }) as Promise<{ data: MediaPage }>,
+    sanityFetch({ query: totalFolders }) as Promise<{ data: number }>,
+    sanityFetch({ query: mediaFolderQuery, params: { start, end } }) as Promise<{ data: Media[] }>,
+  ])
+
+  const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE)
 
   return (
     <div>
@@ -53,6 +65,12 @@ export default async function Media() {
           ))
         )}
       </div>
+
+      {totalPages > 1 && (
+        <div className="mt-12">
+          <AppPagination currentPage={currentPage} totalPages={totalPages} />
+        </div>
+      )}
     </div>
   )
 }

@@ -57,7 +57,7 @@ const AppPagination = ({ currentPage, totalPages }: AppPaginationProps) => {
   }
 
   return (
-    <div className="flex items-center justify-center gap-6 sm:gap-10">
+    <div className="flex items-center justify-center gap-6">
       {/* Previous Button */}
       <Button
         variant="outline"
