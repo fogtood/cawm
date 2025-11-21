@@ -10,13 +10,10 @@ import { sanityFetch } from '@/sanity/live'
 import { Mail, MapPin, Phone, Send } from 'lucide-react'
 
 export default async function Contact() {
-  const { data: contactPage } = (await sanityFetch({ query: contactPageQuery })) as {
-    data: ContactPage
-  }
-
-  const { data: generalSettings } = (await sanityFetch({ query: generalSettingsQuery })) as {
-    data: GeneralSettings
-  }
+  const [{ data: contactPage }, { data: generalSettings }] = await Promise.all([
+    sanityFetch({ query: contactPageQuery }) as Promise<{ data: ContactPage }>,
+    sanityFetch({ query: generalSettingsQuery }) as Promise<{ data: GeneralSettings }>,
+  ])
 
   return (
     <div>

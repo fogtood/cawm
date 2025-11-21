@@ -9,11 +9,34 @@ import { PlayIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/lib/sanity.image'
-import { fetchHomePageData } from '@/lib/actions'
+import { sanityFetch } from '@/sanity/live'
+import {
+  homePageQuery,
+  homeSermonsQuery,
+  homeServicesQuery,
+  homeUpcomingEventsQuery,
+  testimonialsQuery,
+  valuesQuery,
+} from '@/lib/sanity.queries'
+import { Event, HomePage, Sermon, Service, Testimonial, Values } from '@/sanity.types'
 
 export default async function Home() {
   // Fetch data from Sanity
-  const { homePage, sermons, services, values, events, testimonials } = await fetchHomePageData()
+  const [
+    { data: homePage },
+    { data: sermons },
+    { data: services },
+    { data: values },
+    { data: events },
+    { data: testimonials },
+  ] = await Promise.all([
+    sanityFetch({ query: homePageQuery }) as Promise<{ data: HomePage | null }>,
+    sanityFetch({ query: homeSermonsQuery }) as Promise<{ data: Sermon[] }>,
+    sanityFetch({ query: homeServicesQuery }) as Promise<{ data: Service[] }>,
+    sanityFetch({ query: valuesQuery }) as Promise<{ data: Values | null }>,
+    sanityFetch({ query: homeUpcomingEventsQuery }) as Promise<{ data: Event[] }>,
+    sanityFetch({ query: testimonialsQuery }) as Promise<{ data: Testimonial[] }>,
+  ])
 
   const valueKeys = ['mission', 'vision', 'belief'] as const
 
@@ -388,27 +411,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
-      {/* Join Community */}
-      {/* <div className="bg-[#F6F6FF] py-20">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-4 text-center">
-            <h1 className="text-3xl font-semibold uppercase md:text-4xl">
-              Ready to Join Our Community?
-            </h1>
-            <p className="mb-4 text-center text-base leading-7 text-[#575756] md:text-lg">
-              We&apos;d love to welcome you to Christ Apostolic World Ministry. Come as you are and
-              discover a place where you belong, grow, and make a difference.
-            </p>
-            <Button
-              className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-3 text-base font-normal"
-              asChild
-            >
-              <Link href="/contact">Plan to visit</Link>
-            </Button>
-          </div>
-        </div>
-      </div> */}
     </div>
   )
 }
