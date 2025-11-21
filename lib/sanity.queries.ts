@@ -28,7 +28,7 @@ export const sermonBySlugQuery = groq`*[_type == "sermon" && slug.current == $sl
 }`
 
 // Event queries
-export const eventsQuery = groq`*[_type == "event"] | order(date asc) {
+export const eventsQuery = groq`*[_type == "event"] | order(date asc) [$start...$end] {
   _id,
   title,
   slug,
@@ -40,6 +40,9 @@ export const eventsQuery = groq`*[_type == "event"] | order(date asc) {
   eventType,
   isUpcoming
 }`
+
+// Total Event
+export const totalEvents = groq`count(*[_type == "event"])`
 
 export const upcomingEventsQuery = groq`*[_type == "event" && isUpcoming == true] | order(date asc) {
   _id,
