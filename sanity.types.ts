@@ -13,6 +13,59 @@
  */
 
 // Source: schema.json
+export type GeneralSettings = {
+  _id: string
+  _type: 'generalSettings'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  logo?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+  address?: string
+  phone?: string
+  email?: string
+  mapEmbedUrl?: string
+  facebook?: string
+  instagram?: string
+  twitter?: string
+  youtube?: string
+  siteTitle?: string
+  siteDescription?: string
+  favicon?: {
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+  }
+}
+
+export type Media = {
+  _id: string
+  _type: 'media'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  date?: string
+  driveUrl?: string
+}
+
 export type Testimonial = {
   _id: string
   _type: 'testimonial'
@@ -137,6 +190,106 @@ export type Sermon = {
   youtubeVideoId?: string
   audioUrl?: string
   category?: 'sunday-service' | 'bible-study' | 'prayer-meeting' | 'special-service'
+}
+
+export type ContactPage = {
+  _id: string
+  _type: 'contactPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  hero?: {
+    title?: string
+    subtitle?: string
+    backgroundImage?: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    }
+  }
+}
+
+export type SermonsPage = {
+  _id: string
+  _type: 'sermonsPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  hero?: {
+    title?: string
+    subtitle?: string
+    backgroundImage?: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    }
+  }
+}
+
+export type EventsPage = {
+  _id: string
+  _type: 'eventsPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  hero?: {
+    title?: string
+    subtitle?: string
+    backgroundImage?: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    }
+  }
+}
+
+export type MediaPage = {
+  _id: string
+  _type: 'mediaPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  hero?: {
+    title?: string
+    subtitle?: string
+    backgroundImage?: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    }
+  }
 }
 
 export type AboutMinistriesPage = {
@@ -490,12 +643,18 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
+  | GeneralSettings
+  | Media
   | Testimonial
   | Values
   | ValueItem
   | Service
   | Event
   | Sermon
+  | ContactPage
+  | SermonsPage
+  | EventsPage
+  | MediaPage
   | AboutMinistriesPage
   | AboutYouthsPage
   | AboutPage

@@ -3,12 +3,35 @@ import ContactInfo from '@/components/common/contact-info'
 import CustomInput from '@/components/common/custom-input'
 import { Button } from '@/components/ui/button'
 import { FieldGroup, FieldSet } from '@/components/ui/field'
+import { urlFor } from '@/lib/sanity.image'
+import { contactPageQuery, generalSettingsQuery } from '@/lib/sanity.queries'
+import { ContactPage, GeneralSettings } from '@/sanity.types'
+import { sanityFetch } from '@/sanity/live'
 import { Mail, MapPin, Phone, Send } from 'lucide-react'
 
-export default function Contact() {
+export default async function Contact() {
+  const { data: contactPage } = (await sanityFetch({ query: contactPageQuery })) as {
+    data: ContactPage
+  }
+
+  const { data: generalSettings } = (await sanityFetch({ query: generalSettingsQuery })) as {
+    data: GeneralSettings
+  }
+
   return (
     <div>
-      <Bg title="Contact Us" subtitle="Get in touch with us for any inquiries or support" />
+      <Bg
+        title={contactPage?.hero?.title || 'Contact Us'}
+        subtitle={
+          contactPage?.hero?.subtitle || 'Get in touch with us for any inquiries or support'
+        }
+        background={
+          contactPage?.hero?.backgroundImage
+            ? urlFor(contactPage.hero.backgroundImage).url()
+            : '/images/hero.png'
+        }
+      />
+
       <div className="container mx-auto my-20 grid grid-cols-1 justify-between gap-10 px-4 md:grid md:grid-cols-2 md:gap-15 md:px-6 lg:gap-20">
         <div className="space-y-12" data-aos="fade-right" data-aos-duration="800">
           <div>
@@ -16,11 +39,22 @@ export default function Contact() {
             <div className="mt-5 space-y-8">
               <ContactInfo
                 title="Address"
-                subtitle="Block 115 T.F. Kuboye Road By The Podium Event Centre Marwa Bus Stop, Lekki Phase One, Lagos"
+                subtitle={
+                  generalSettings?.address ||
+                  'Block 115 T.F. Kuboye Road By The Podium Event Centre Marwa Bus Stop, Lekki Phase One, Lagos'
+                }
                 icon={<MapPin />}
               />
-              <ContactInfo title="Phone" subtitle="+234 803 123 4567" icon={<Phone />} />
-              <ContactInfo title="Email" subtitle="info@example.com" icon={<Mail />} />
+              <ContactInfo
+                title="Phone"
+                subtitle={generalSettings?.phone || '+234 803 123 4567'}
+                icon={<Phone />}
+              />
+              <ContactInfo
+                title="Email"
+                subtitle={generalSettings?.email || 'info@example.com'}
+                icon={<Mail />}
+              />
             </div>
           </div>
 
@@ -28,7 +62,7 @@ export default function Contact() {
             <h1 className="text-2xl font-semibold">Find Us</h1>
             <div className="mt-5 h-[400px] w-full">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d495.5907446452543!2d3.4642515745324087!3d6.429241295148643!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x103bf5ae426db043%3A0x4fd07eca2cd2b322!2sThe%20LOGIC%20Church%20Headquarters!5e0!3m2!1sen!2sng!4v1762045490255!5m2!1sen!2sng"
+                src={generalSettings.mapEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

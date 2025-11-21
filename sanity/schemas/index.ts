@@ -13,6 +13,7 @@ import mediaPage from './mediaPage'
 import eventsPage from './eventsPage'
 import sermonsPage from './sermonsPage'
 import contactPage from './contactPage'
+import generalSettings from './generalSettings'
 
 export const schemaTypes = [
   homePage,
@@ -30,4 +31,5 @@ export const schemaTypes = [
   valueItem,
   testimonial,
   media,
+  generalSettings,
 ]

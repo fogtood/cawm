@@ -93,7 +93,7 @@ export const valuesQuery = groq`*[_type == "values"][0] {
   belief
 }`
 
-export const mediaFolderQuery = groq`*[_type == "mediaFolder"] | order(date desc) {
+export const mediaFolderQuery = groq`*[_type == "media"] | order(date desc) {
   _id,
   title,
   date,
@@ -108,6 +108,22 @@ export const testimonialsQuery = groq`*[_type == "testimonial"] | order(order as
   testimony,
   image,
   order
+}`
+
+export const generalSettingsQuery = groq`*[_type == "generalSettings"][0] {
+  _id,
+  siteTitle,
+  siteDescription,
+  email,
+  phone,
+  address,
+  facebook, 
+  instagram,
+  twitter,
+  youtube,
+  mapEmbedUrl,
+  logo,
+  favicon
 }`
 
 // Home page queries (limited results)
