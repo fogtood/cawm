@@ -6,13 +6,13 @@ import { Event, EventsPage } from '@/sanity.types'
 import { sanityFetch } from '@/sanity/live'
 import AppPagination from '@/components/common/app-pagination'
 
-interface EventsPageProps {
+export interface PageParams {
   searchParams: Promise<{ page?: string }>
 }
 
 const ITEMS_PER_PAGE = 12
 
-export default async function Events({ searchParams }: EventsPageProps) {
+export default async function Events({ searchParams }: PageParams) {
   const params = await searchParams
   const currentPage = Number(params.page) || 1
   const start = (currentPage - 1) * ITEMS_PER_PAGE

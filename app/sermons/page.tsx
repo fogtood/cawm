@@ -2,15 +2,27 @@
 import Bg from '@/components/common/bg'
 import SermonCard from '@/components/common/sermon-card'
 import { urlFor } from '@/lib/sanity.image'
-import { sermonsPageQuery, sermonsQuery } from '@/lib/sanity.queries'
+import { sermonsPageQuery, sermonsQuery, totalSermons } from '@/lib/sanity.queries'
 import { Sermon, SermonsPage } from '@/sanity.types'
 import { sanityFetch } from '@/sanity/live'
+import { PageParams } from '../events/page'
+import AppPagination from '@/components/common/app-pagination'
 
-export default async function Sermons() {
-  const { data: sermonsPage } = (await sanityFetch({ query: sermonsPageQuery })) as {
-    data: SermonsPage
-  }
-  const { data: sermons } = (await sanityFetch({ query: sermonsQuery })) as { data: Sermon[] }
+const ITEMS_PER_PAGE = 12
+
+export default async function Sermons({ searchParams }: PageParams) {
+  const params = await searchParams
+  const currentPage = Number(params.page) || 1
+  const start = (currentPage - 1) * ITEMS_PER_PAGE
+  const end = start + ITEMS_PER_PAGE
+
+  const [{ data: sermonsPage }, { data: totalCount }, { data: sermons }] = await Promise.all([
+    sanityFetch({ query: sermonsPageQuery }) as Promise<{ data: SermonsPage }>,
+    sanityFetch({ query: totalSermons }) as Promise<{ data: number }>,
+    sanityFetch({ query: sermonsQuery, params: { start, end } }) as Promise<{ data: Sermon[] }>,
+  ])
+
+  const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE)
 
   return (
     <div>
@@ -47,7 +59,12 @@ export default async function Sermons() {
             ))
           )}
         </div>
-        {/* <AppPagination /> */}
+
+        {totalPages > 1 && (
+          <div className="mt-12">
+            <AppPagination currentPage={currentPage} totalPages={totalPages} />
+          </div>
+        )}
       </div>
     </div>
   )
