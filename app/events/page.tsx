@@ -5,23 +5,37 @@ import { eventsPageQuery, eventsQuery, totalEvents } from '@/lib/sanity.queries'
 import { Event, EventsPage } from '@/sanity.types'
 import { sanityFetch } from '@/sanity/live'
 import AppPagination from '@/components/common/app-pagination'
+import Search from '@/components/common/search'
 
 export interface PageParams {
-  searchParams: Promise<{ page?: string }>
+  searchParams: Promise<{
+    page?: string
+    search?: string
+    speaker?: string
+    category?: string
+    alphabet?: string
+  }>
 }
 
 const ITEMS_PER_PAGE = 12
 
 export default async function Events({ searchParams }: PageParams) {
-  const params = await searchParams
-  const currentPage = Number(params.page) || 1
+  const { search = '', page } = await searchParams
+  const currentPage = Number(page) || 1
   const start = (currentPage - 1) * ITEMS_PER_PAGE
   const end = start + ITEMS_PER_PAGE
 
   const [{ data: eventsPage }, { data: totalCount }, { data: events }] = await Promise.all([
     sanityFetch({ query: eventsPageQuery }) as Promise<{ data: EventsPage }>,
     sanityFetch({ query: totalEvents }) as Promise<{ data: number }>,
-    sanityFetch({ query: eventsQuery, params: { start, end } }) as Promise<{ data: Event[] }>,
+    sanityFetch({
+      query: eventsQuery,
+      params: {
+        search: search || null,
+        start,
+        end,
+      },
+    }) as Promise<{ data: Event[] }>,
   ])
 
   const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE)
@@ -42,6 +56,10 @@ export default async function Events({ searchParams }: PageParams) {
       />
 
       <div className="container mx-auto my-20 px-4 md:px-6">
+        <div className="mb-12 ml-auto max-w-sm">
+          <Search />
+        </div>
+
         <div className="grid min-h-[180px] grid-cols-1 place-items-center gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {events.length === 0 ? (
             <div className="col-span-full py-12 text-center text-[#575756]">

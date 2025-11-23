@@ -1,7 +1,12 @@
 import { groq } from 'next-sanity'
 
 // Sermon queries
-export const sermonsQuery = groq`*[_type == "sermon"] | order(date desc) [$start...$end] {
+export const sermonsQuery = groq`*[_type == "sermon" 
+    && (!defined($search) || title match $search || preacher match $search || description match $search)
+    && (!defined($speaker) || preacher == $speaker)
+    && (!defined($category) || category == $category)
+    && (!defined($alphabet) || title match $alphabet)
+  ] | order(dateTime desc) [$start...$end]{
   _id,
   title,
   slug,
@@ -30,7 +35,7 @@ export const sermonBySlugQuery = groq`*[_type == "sermon" && slug.current == $sl
 export const totalSermons = groq`count(*[_type == "sermon"])`
 
 // Event queries
-export const eventsQuery = groq`*[_type == "event"] | order(date asc) [$start...$end] {
+export const eventsQuery = groq`*[_type == "event" && (!defined($search) || title match $search || description match $search)] | order(date asc) [$start...$end] {
   _id,
   title,
   slug,
