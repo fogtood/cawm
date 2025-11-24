@@ -103,7 +103,7 @@ export const valuesQuery = groq`*[_type == "values"][0] {
   belief
 }`
 
-export const mediaFolderQuery = groq`*[_type == "media"] | order(date desc) [$start...$end] {
+export const mediaFolderQuery = groq`*[_type == "media" && (!defined($search) || title match $search || date match $search)] | order(date desc) [$start...$end] {
   _id,
   title,
   date,

@@ -1,4 +1,3 @@
-// components/ui/pagination.tsx
 'use client'
 
 import Link from 'next/link'
@@ -87,7 +86,7 @@ const AppPagination = ({ currentPage, totalPages }: AppPaginationProps) => {
             variant={currentPage === page ? 'default' : 'outline'}
             size="icon"
             asChild={currentPage !== page}
-            className={`${currentPage === page && 'bg-[#393798]'} rounded-full`}
+            className={`${currentPage === page && 'bg-[#393798]!'} rounded-full`}
           >
             {currentPage === page ? (
               <span>{page}</span>

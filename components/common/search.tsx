@@ -21,12 +21,11 @@ export default function Search() {
   }, 300)
 
   return (
-    <InputGroup>
+    <InputGroup className="h-auto border-[#C5C3C6]! py-1 shadow-none ring-0!">
       <InputGroupInput
         placeholder="Search..."
         onChange={(e) => handleSearch(e.target.value)}
         defaultValue={params.get('search')?.toString()}
-        className="h-auto py-2"
       />
       <InputGroupAddon>
         <SearchIcon />

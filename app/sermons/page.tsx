@@ -51,7 +51,7 @@ export default async function Sermons({ searchParams }: PageParams) {
       />
 
       <div className="container mx-auto my-20 px-4 md:px-6">
-        <div className="mb-12 ml-auto max-w-sm">
+        <div className="mb-8 ml-auto max-w-sm">
           <Search />
         </div>
 
