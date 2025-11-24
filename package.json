@@ -13,6 +13,7 @@
     "typegen": "sanity typegen generate"
   },
   "dependencies": {
+    "@formspree/react": "^3.0.0",
     "@portabletext/react": "^5.0.0",
     "@radix-ui/react-collapsible": "^1.1.12",
     "@radix-ui/react-dialog": "^1.1.15",
