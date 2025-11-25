@@ -91,7 +91,7 @@ export default async function AboutYouths() {
 
           {/* Gallery Section */}
           <div data-aos="fade-up" data-aos-duration="800">
-            <GallerySection />
+            <GallerySection photos={aboutYouthPage?.photos} />
           </div>
         </div>
       </section>

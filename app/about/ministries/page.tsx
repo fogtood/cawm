@@ -96,7 +96,7 @@ export default async function AboutMinistries() {
           </div>
 
           <div data-aos="fade-up" data-aos-duration="800">
-            <GallerySection />
+            {/* <GallerySection /> */}
           </div>
         </div>
       </section>

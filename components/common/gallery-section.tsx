@@ -1,35 +1,50 @@
+'use client'
+
 import Image from 'next/image'
+import Masonry from 'react-masonry-css'
+import { urlFor } from '@/lib/sanity.image'
+import type { SanityImageSource } from '@sanity/image-url/lib/types/types'
 
-const GallerySection = () => {
-  return (
-    <div className="my-20 grid w-full gap-4 md:grid-cols-2">
-      {/* Left half - large image */}
-      <div className="relative aspect-16/10 w-full overflow-hidden md:h-[600px]">
-        <Image
-          src="/images/hero.png"
-          alt="Church congregation"
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 50vw"
-        />
-      </div>
-
-      {/* Right half - 2x2 grid */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        {Array.from({ length: 4 }).map((_, i) => (
-          <div key={i} className="relative aspect-16/10 w-full overflow-hidden sm:h-[290px]">
-            <Image
-              src="/images/hero.png"
-              alt={`Church congregation ${i + 1}`}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 50vw, 25vw"
-            />
-          </div>
-        ))}
-      </div>
-    </div>
-  )
+interface GallerySectionProps {
+  photos?: SanityImageSource[]
 }
 
-export default GallerySection
+const breakpointColumns = {
+  default: 4,
+  1280: 3,
+  1024: 2,
+  640: 1,
+}
+
+export default function GallerySection({ photos }: GallerySectionProps) {
+  if (!photos || photos.length === 0) return null
+
+  return (
+    <Masonry
+      breakpointCols={breakpointColumns}
+      className="-ml-4 flex w-auto"
+      columnClassName="pl-4 bg-clip-padding"
+    >
+      {photos.map((photo, index) => (
+        <div
+          key={index}
+          className="mb-4 overflow-hidden rounded-lg"
+          data-aos="fade-up"
+          data-aos-delay={index * 50}
+          data-aos-duration="800"
+        >
+          <div className="relative w-full">
+            <Image
+              src={urlFor(photo).width(800).url()}
+              alt={`Gallery image ${index + 1}`}
+              width={800}
+              height={600}
+              className="h-auto w-full object-cover transition-transform duration-300 hover:scale-105"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+            />
+          </div>
+        </div>
+      ))}
+    </Masonry>
+  )
+}

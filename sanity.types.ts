@@ -392,6 +392,19 @@ export type AboutYouthsPage = {
       _key: string
     }>
   }
+  photos?: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+    _key: string
+  }>
 }
 
 export type AboutPage = {

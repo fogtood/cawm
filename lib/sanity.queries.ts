@@ -272,6 +272,11 @@ export const aboutYouthsPageQuery = groq`*[_type == "aboutYouthsPage"][0] {
       title, 
       description,
       leadership
+    }, 
+    photos[]{
+      asset->{
+        url
+      }
     }
 }`
 

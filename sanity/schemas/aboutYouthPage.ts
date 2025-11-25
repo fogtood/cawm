@@ -112,6 +112,13 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'photos',
+      title: 'Photos',
+      type: 'array',
+      of: [{ type: 'image' }],
+      options: { layout: 'grid' },
+    }),
   ],
   preview: {
     select: {
