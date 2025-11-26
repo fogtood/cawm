@@ -1,10 +1,10 @@
 import Bg from '@/components/common/bg'
 import GallerySection from '@/components/common/gallery-section'
 import { urlFor } from '@/lib/sanity.image'
+import LeaderCard from '@/components/common/leader-card'
 import { aboutMinistriesPageQuery } from '@/lib/sanity.queries'
 import { AboutMinistriesPage } from '@/sanity.types'
 import { sanityFetch } from '@/sanity/live'
-import Image from 'next/image'
 
 export default async function AboutMinistries() {
   const { data: aboutMinistriesPage } = (await sanityFetch({
@@ -62,31 +62,7 @@ export default async function AboutMinistries() {
             {aboutMinistriesPage?.leadershipSection?.leadership &&
             aboutMinistriesPage.leadershipSection.leadership.length > 0 ? (
               aboutMinistriesPage.leadershipSection.leadership.map((leader, index: number) => (
-                <div
-                  key={leader._key || index}
-                  className="flex w-full flex-col items-center justify-center gap-2.5"
-                  data-aos="zoom-in"
-                  data-aos-delay={index * 100}
-                  data-aos-duration="800"
-                >
-                  <Image
-                    src={
-                      leader?.image && urlFor(leader.image).url()
-                        ? urlFor(leader.image).url()
-                        : '/images/pastor.png'
-                    }
-                    alt={leader?.name || 'Leader'}
-                    width={320}
-                    height={320}
-                    className="overflow-hidden rounded-2xl object-contain"
-                  />
-                  <div className="text-center">
-                    <h3 className="text-lg font-semibold text-[#4A4A4A]">
-                      {leader?.name || 'Leader Name'}
-                    </h3>
-                    <p className="text-[#636363]">{leader?.position || ''}</p>
-                  </div>
-                </div>
+                <LeaderCard leader={leader} index={index} key={leader._key || index} />
               ))
             ) : (
               <p className="col-span-full text-center text-[#636363]">
@@ -96,7 +72,7 @@ export default async function AboutMinistries() {
           </div>
 
           <div data-aos="fade-up" data-aos-duration="800">
-            {/* <GallerySection /> */}
+            <GallerySection photos={aboutMinistriesPage.photos || []} />
           </div>
         </div>
       </section>

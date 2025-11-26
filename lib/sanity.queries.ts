@@ -296,6 +296,11 @@ export const aboutMinistriesPageQuery = groq`*[_type == "aboutMinistriesPage"][0
       title, 
       description,
       leadership
+    }, 
+    photos[]{
+      asset->{
+        url
+      }
     }
 }`
 

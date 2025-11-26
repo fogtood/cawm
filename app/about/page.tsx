@@ -1,9 +1,9 @@
 import Bg from '@/components/common/bg'
 import { urlFor } from '@/lib/sanity.image'
+import LeaderCard from '@/components/common/leader-card'
 import { aboutPageQuery } from '@/lib/sanity.queries'
 import { AboutPage } from '@/sanity.types'
 import { sanityFetch } from '@/sanity/live'
-import Image from 'next/image'
 
 export default async function About() {
   const { data: aboutPage } = (await sanityFetch({ query: aboutPageQuery })) as { data: AboutPage }
@@ -68,31 +68,7 @@ export default async function About() {
             {aboutPage?.leadershipSection?.leadership &&
             aboutPage.leadershipSection.leadership.length > 0 ? (
               aboutPage.leadershipSection.leadership.map((leader, index: number) => (
-                <div
-                  key={leader._key || index}
-                  className="flex w-full flex-col items-center justify-center gap-2.5"
-                  data-aos="zoom-in"
-                  data-aos-delay={index * 100}
-                  data-aos-duration="800"
-                >
-                  <Image
-                    src={
-                      leader?.image && urlFor(leader.image).url()
-                        ? urlFor(leader.image).url()
-                        : '/images/pastor.png'
-                    }
-                    alt={leader?.name || 'Leader'}
-                    width={320}
-                    height={320}
-                    className="overflow-hidden rounded-2xl object-contain"
-                  />
-                  <div className="text-center">
-                    <h3 className="text-lg font-semibold text-[#4A4A4A]">
-                      {leader?.name || 'Leader Name'}
-                    </h3>
-                    <p className="text-[#636363]">{leader?.position || ''}</p>
-                  </div>
-                </div>
+                <LeaderCard leader={leader} index={index} key={leader._key || index} />
               ))
             ) : (
               <p className="col-span-full text-center text-[#636363]">
