@@ -23,7 +23,7 @@ const Bg = ({
         src={background || '/images/hero.png'}
         alt="Background"
         fill
-        priority
+        loading="lazy"
         className="object-cover"
       />
 

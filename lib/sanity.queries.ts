@@ -138,100 +138,41 @@ export const generalSettingsQuery = groq`*[_type == "generalSettings"][0] {
   favicon
 }`
 
-// Home page queries (limited results)
-export const homeSermonsQuery = groq`*[_type == "sermon"] | order(date desc) [0...4] {
-  _id,
-  title,
-  slug,
-  preacher,
-  dateTime,
-  description,
-  image,
-  videoUrl,
-  audioUrl,
-  category
-}`
-
-export const homeServicesQuery = groq`*[_type == "service"] | order(order asc) [0...3] {
-  _id,
-  title,
-  description,
-  location,
-  image,
-  schedule,
-  order
-}`
-
-export const homeMissionsQuery = groq`*[_type == "mission"] | order(order asc) [0...3] {
-  _id,
-  title,
-  description,
-  icon,
-  order
-}`
-
-export const homeUpcomingEventsQuery = groq`*[_type == "event" && isUpcoming == true] | order(date asc) [0...4] {
-  _id,
-  title,
-  slug,
-  description,
-  image,
-  date,
-  endDate,
-  location,
-  eventType
-}`
-
-// Home page content query
-export const homePageQuery = groq`*[_type == "homePage"][0] {
+export const HOME_QUERY = groq`*[_type == "homePage"][0] {
   _id,
   title,
   hero {
     title,
     subtitle,
     backgroundImage,
-    primaryButton {
-      text,
-      link
-    },
-    secondaryButton {
-      text,
-      link
-    }
+    primaryButton { text, link },
+    secondaryButton { text, link }
   },
-  welcome {
-    heading,
-    title,
-    description,
-    image,
-    buttonText,
-    buttonLink
+  welcome { heading, title, description, image, buttonText, buttonLink },
+  sermonsSection { _id, identifier, title, description, buttonText, buttonLink },
+  servicesSection { _id, identifier, title, description, buttonText, buttonLink },
+  liveProgram { title, description, youtubeVideoId },
+  eventsSection { _id, identifier, title, description, buttonText, buttonLink },
+  testimonialsSection { _id, identifier, title, description, buttonText, buttonLink },
+
+  // Small lists included in the same request to avoid additional round trips
+  "sermons": *[_type == "sermon"] | order(dateTime desc) [0...4] {
+    _id, title, slug, preacher, dateTime, description, shortPreview, image, videoUrl, audioUrl, category
   },
-  sermonsSection {
-    title,
-    description,
-    buttonText,
-    buttonLink
+
+  "services": *[_type == "service"] | order(order asc) [0...3] {
+    _id, title, description, location, image, schedule, order
   },
-  servicesSection {
-    title,
-    description
+
+  "events": *[_type == "event" && isUpcoming == true] | order(date asc) [0...4] {
+    _id, title, slug, description, shortPreview, image, date, endDate, location, eventType
   },
-  liveProgram {
-    title,
-    description,
-    youtubeVideoId
+
+  "testimonials": *[_type == "testimonial"] | order(order asc) [0...6] {
+    _id, name, role, testimony, image, order
   },
-  eventsSection {
-    title,
-    description,
-    buttonText,
-    buttonLink
-  },
-  testimonialsSection {
-    title,
-    description
-  }
+
+  "values": *[_type == "values"][0] { _id, mission, vision, belief }
 }`
 
 // About Page

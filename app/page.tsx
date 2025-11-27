@@ -10,33 +10,28 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/lib/sanity.image'
 import { sanityFetch } from '@/sanity/live'
-import {
-  homePageQuery,
-  homeSermonsQuery,
-  homeServicesQuery,
-  homeUpcomingEventsQuery,
-  testimonialsQuery,
-  valuesQuery,
-} from '@/lib/sanity.queries'
+import { HOME_QUERY } from '@/lib/sanity.queries'
 import { Event, HomePage, Sermon, Service, Testimonial, Values } from '@/sanity.types'
 
 export default async function Home() {
-  // Fetch data from Sanity
-  const [
-    { data: homePage },
-    { data: sermons },
-    { data: services },
-    { data: values },
-    { data: events },
-    { data: testimonials },
-  ] = await Promise.all([
-    sanityFetch({ query: homePageQuery }) as Promise<{ data: HomePage | null }>,
-    sanityFetch({ query: homeSermonsQuery }) as Promise<{ data: Sermon[] }>,
-    sanityFetch({ query: homeServicesQuery }) as Promise<{ data: Service[] }>,
-    sanityFetch({ query: valuesQuery }) as Promise<{ data: Values | null }>,
-    sanityFetch({ query: homeUpcomingEventsQuery }) as Promise<{ data: Event[] }>,
-    sanityFetch({ query: testimonialsQuery }) as Promise<{ data: Testimonial[] }>,
-  ])
+  const result = (await sanityFetch({ query: HOME_QUERY })) as {
+    data:
+      | (HomePage & {
+          sermons?: Sermon[]
+          services?: Service[]
+          events?: Event[]
+          testimonials?: Testimonial[]
+          values?: Values | null
+        })
+      | null
+  }
+
+  const homePage: HomePage | null = result.data ?? null
+  const sermons: Sermon[] = (result.data && result.data.sermons) ?? []
+  const services: Service[] = (result.data && result.data.services) ?? []
+  const values: Values | null = (result.data && result.data.values) ?? null
+  const events: Event[] = (result.data && result.data.events) ?? []
+  const testimonials: Testimonial[] = (result.data && result.data.testimonials) ?? []
 
   const valueKeys = ['mission', 'vision', 'belief'] as const
 
@@ -57,7 +52,12 @@ export default async function Home() {
         {/* Background image */}
         {homePage?.hero?.backgroundImage ? (
           <Image
-            src={urlFor(homePage.hero.backgroundImage).width(1920).height(1080).url()}
+            src={urlFor(homePage.hero.backgroundImage)
+              .width(1920)
+              .height(1080)
+              .auto('format')
+              .quality(75)
+              .url()}
             alt="Background"
             fill
             priority
@@ -146,7 +146,12 @@ export default async function Home() {
           >
             {homePage?.welcome?.image ? (
               <Image
-                src={urlFor(homePage.welcome.image).width(800).height(600).url()}
+                src={urlFor(homePage.welcome.image)
+                  .width(800)
+                  .height(600)
+                  .auto('format')
+                  .quality(75)
+                  .url()}
                 alt={homePage.welcome.title || 'Welcome'}
                 fill
                 className="object-cover"
