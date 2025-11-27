@@ -58,7 +58,7 @@ export default async function Contact() {
             <h1 className="text-2xl font-semibold">Find Us</h1>
             <div className="mt-5 h-[400px] w-full">
               <iframe
-                src={generalSettings.mapEmbedUrl}
+                src={generalSettings?.mapEmbedUrl}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}

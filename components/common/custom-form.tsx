@@ -10,16 +10,21 @@ import { useEffect, useRef } from 'react'
 const CustomForm = () => {
   const [state, handleSubmit] = useForm('xanzwlop')
   const formRef = useRef<HTMLFormElement>(null)
+  const wasSubmittingRef = useRef(false)
 
   useEffect(() => {
-    if (state.succeeded) {
-      // Reset native form elements
-      formRef.current?.reset()
-      alert('Submitted successfully!')
-    } else if (state.errors && Array.isArray(state.errors) && state.errors.length > 0) {
-      alert('Something went wrong.')
+    // Detect when submission finishes
+    if (wasSubmittingRef.current && !state.submitting) {
+      if (state.succeeded) {
+        formRef.current?.reset()
+        alert('Submitted successfully!')
+      } else if (Array.isArray(state.errors) && state.errors.length > 0) {
+        alert('Something went wrong.')
+      }
     }
-  }, [state.succeeded, state.errors])
+
+    wasSubmittingRef.current = state.submitting
+  }, [state.submitting, state.succeeded, state.errors])
 
   return (
     <form ref={formRef} id="contact-form" onSubmit={handleSubmit}>

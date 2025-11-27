@@ -1,9 +1,9 @@
 import { Mail, MapPin, Phone } from 'lucide-react'
 import Brand from '../common/brand'
 import Link from 'next/link'
-import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import Image from 'next/image'
+import FooterForm from '../common/footer-form'
 
 const Footer = () => {
   return (
@@ -56,16 +56,7 @@ const Footer = () => {
           <div className="col-span-1 space-y-3.5">
             <h4 className="text-lg font-medium text-white">Stay Connected</h4>
             <p className="text-sm">Subscribe to our newsletter for updates and inspiration.</p>
-            <form>
-              <Input
-                type="email"
-                placeholder="Enter your email"
-                className="mb-4 h-auto w-full max-w-sm rounded-sm border-[#DADADA4D]! bg-[#57575633] px-2.5 py-3.5 ring-0!"
-              />
-              <Button className="h-auto w-full max-w-sm cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-3 text-base font-normal">
-                Subscribe
-              </Button>
-            </form>
+            <FooterForm />
           </div>
         </div>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3 border-t border-[#5757564D] py-5 md:justify-between">

@@ -51,11 +51,7 @@ export default async function AboutMinistries() {
             data-aos-delay="100"
             data-aos-duration="800"
           >
-            Lorem ipsum dolor sit amet consectetur. Leo in sed magna sapien purus augue duis. Id
-            imperdiet a tristique quam ultrices tincidunt suspendisse nec mauris. Diam amet
-            ullamcorper sed sed a sapien. Tincidunt tellus bibendum proin pharetra est in et
-            sagittis. Ut massa est vitae eget magna id. Parturient diam ut viverra nibh lacus
-            imperdiet cursus. Pellentesque elementum risus id blandit morbi elit praesent.
+            {aboutMinistriesPage?.leadershipSection?.description}
           </p>
 
           <div className="my-12 grid grid-cols-1 place-items-center gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -72,7 +68,7 @@ export default async function AboutMinistries() {
           </div>
 
           <div data-aos="fade-up" data-aos-duration="800">
-            <GallerySection photos={aboutMinistriesPage.photos || []} />
+            <GallerySection photos={aboutMinistriesPage?.photos} />
           </div>
         </div>
       </section>
