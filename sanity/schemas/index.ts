@@ -14,6 +14,8 @@ import eventsPage from './eventsPage'
 import sermonsPage from './sermonsPage'
 import contactPage from './contactPage'
 import generalSettings from './generalSettings'
+import navigation from './navigation'
+import dynamicPage from './dynamicPage'
 
 export const schemaTypes = [
   homePage,
@@ -32,4 +34,6 @@ export const schemaTypes = [
   testimonial,
   media,
   generalSettings,
+  navigation,
+  dynamicPage,
 ]

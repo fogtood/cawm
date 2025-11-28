@@ -284,3 +284,56 @@ export const contactPageQuery = groq`*[_type == "contactPage"][0] {
     backgroundImage,
     },
 }`
+
+// Navigation query
+export const navigationQuery = `*[_type == "navigation"][0] {
+  menuItems[] {
+    title,
+    slug,
+    order,
+    subMenu[] {
+      title,
+      slug
+    }
+  }
+}`
+
+// Dynamic page by slug
+export const dynamicPageBySlugQuery = `*[_type == "dynamicPage" && slug.current == $slug][0] {
+  _id,
+  title,
+  slug,
+  template,
+  hero {
+    title,
+    subtitle,
+    backgroundImage
+  },
+  aboutSection {
+    title,
+    aboutText
+  },
+  mission,
+  vision,
+  leadershipSection {
+    title,
+    description,
+    leadership[] {
+      _key,
+      name,
+      position,
+      image
+    }
+  },
+  photos,
+  contentBlocks,
+  seo {
+    metaTitle,
+    metaDescription
+  }
+}`
+
+// List all dynamic pages (for generating routes)
+export const allDynamicPagesQuery = `*[_type == "dynamicPage"] {
+  "slug": slug.current
+}`

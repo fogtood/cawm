@@ -5,6 +5,8 @@ import Navbar from '@/components/layout/navbar'
 import Footer from '@/components/layout/footer'
 import AOSInit from '@/components/common/aos-init'
 import { SanityLive } from '@/sanity/live'
+import { sanityFetch } from '@/sanity/live'
+import { navigationQuery } from '@/lib/sanity.queries'
 
 const clashDisplay = localFont({
   src: [
@@ -37,17 +39,19 @@ export const metadata: Metadata = {
   description: 'Official website of Christ Apostolic World Ministries (CAWM)',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const { data: navigation } = await sanityFetch({ query: navigationQuery })
+
   return (
     <html lang="en">
       <body className={`${clashDisplay.className} font-sans antialiased`}>
         <AOSInit />
         <div className="flex min-h-screen flex-col overflow-x-hidden">
-          <Navbar />
+          <Navbar menuItems={navigation?.menuItems || []} />
           <section className="flex-1">{children}</section>
           <Footer />
         </div>

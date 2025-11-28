@@ -13,6 +13,132 @@
  */
 
 // Source: schema.json
+export type DynamicPage = {
+  _id: string
+  _type: 'dynamicPage'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  slug?: Slug
+  template?: 'about' | 'youth' | 'basic'
+  hero?: {
+    title?: string
+    subtitle?: string
+    backgroundImage?: {
+      asset?: {
+        _ref: string
+        _type: 'reference'
+        _weak?: boolean
+        [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+      }
+      media?: unknown
+      hotspot?: SanityImageHotspot
+      crop?: SanityImageCrop
+      _type: 'image'
+    }
+  }
+  aboutSection?: {
+    title?: string
+    aboutText?: string
+  }
+  mission?: string
+  vision?: string
+  leadershipSection?: {
+    title?: string
+    description?: string
+    leadership?: Array<{
+      name?: string
+      position?: string
+      image?: {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+      }
+      _type: 'leader'
+      _key: string
+    }>
+  }
+  photos?: Array<{
+    asset?: {
+      _ref: string
+      _type: 'reference'
+      _weak?: boolean
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+    }
+    media?: unknown
+    hotspot?: SanityImageHotspot
+    crop?: SanityImageCrop
+    _type: 'image'
+    _key: string
+  }>
+  contentBlocks?: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>
+          text?: string
+          _type: 'span'
+          _key: string
+        }>
+        style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+        listItem?: 'bullet' | 'number'
+        markDefs?: Array<{
+          href?: string
+          _type: 'link'
+          _key: string
+        }>
+        level?: number
+        _type: 'block'
+        _key: string
+      }
+    | {
+        asset?: {
+          _ref: string
+          _type: 'reference'
+          _weak?: boolean
+          [internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+        }
+        media?: unknown
+        hotspot?: SanityImageHotspot
+        crop?: SanityImageCrop
+        _type: 'image'
+        _key: string
+      }
+  >
+  seo?: {
+    metaTitle?: string
+    metaDescription?: string
+  }
+}
+
+export type Navigation = {
+  _id: string
+  _type: 'navigation'
+  _createdAt: string
+  _updatedAt: string
+  _rev: string
+  title?: string
+  menuItems?: Array<{
+    title?: string
+    slug?: string
+    subMenu?: Array<{
+      title?: string
+      slug?: string
+      _key: string
+    }>
+    order?: number
+    _type: 'menuItem'
+    _key: string
+  }>
+}
+
 export type GeneralSettings = {
   _id: string
   _type: 'generalSettings'
@@ -669,6 +795,8 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
+  | DynamicPage
+  | Navigation
   | GeneralSettings
   | Media
   | Testimonial

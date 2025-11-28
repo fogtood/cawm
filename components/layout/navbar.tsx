@@ -17,61 +17,28 @@ import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '../ui/collapsible'
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from '../ui/sheet'
-// import { useRouter } from 'next/navigation'
+
+interface SubMenuItem {
+  title: string
+  slug: string
+}
 
 interface MenuItem {
   title: string
-  href?: string
-  subMenu?: MenuItem[]
+  slug?: string
+  subMenu?: SubMenuItem[]
+  order?: number
 }
 
-const menuItems: MenuItem[] = [
-  {
-    title: 'Home',
-    href: '/',
-  },
-  {
-    title: 'About Us',
-    subMenu: [
-      {
-        title: 'CAWM',
-        href: '/about',
-      },
-      {
-        title: 'Youth',
-        href: '/about/youths',
-      },
-      {
-        title: 'Ministries',
-        href: '/about/ministries',
-      },
-    ],
-  },
-  {
-    title: 'Resources',
-    subMenu: [
-      {
-        title: 'Media',
-        href: '/media',
-      },
-      {
-        title: 'Events',
-        href: '/events',
-      },
-      {
-        title: 'Sermons',
-        href: '/sermons',
-      },
-    ],
-  },
-  {
-    title: 'Contact Us',
-    href: '/contact',
-  },
-]
+interface NavbarProps {
+  menuItems?: MenuItem[]
+}
 
-const Navbar = () => {
+const Navbar = ({ menuItems = [] }: NavbarProps) => {
   const [open, setOpen] = useState(false)
+
+  // Sort menu items by order
+  const sortedMenuItems = [...menuItems].sort((a, b) => (a.order || 0) - (b.order || 0))
 
   return (
     <nav className="w-full bg-white">
@@ -82,33 +49,33 @@ const Navbar = () => {
         {/* Desktop Links */}
         <NavigationMenu className="hidden text-[#262626]! md:block">
           <NavigationMenuList className="flex gap-8">
-            {menuItems.map((item) => (
-              <NavigationMenuItem key={item.title}>
-                {item.subMenu ? (
+            {sortedMenuItems.map((item, idx) => (
+              <NavigationMenuItem key={idx}>
+                {item.subMenu && item.subMenu.length > 0 ? (
                   <>
                     <NavigationMenuTrigger className="bg-transparent! p-0 text-lg font-medium">
                       {item.title}
                     </NavigationMenuTrigger>
                     <NavigationMenuContent className="rounded-none border-none shadow-none">
                       <ul className="grid w-[135px] gap-2 p-3">
-                        {item.subMenu.map((subItem) => (
-                          <li key={subItem.title}>
+                        {item.subMenu.map((subItem, subIdx) => (
+                          <li key={subIdx}>
                             <NavigationMenuLink className="bg-transparent! text-lg" asChild>
-                              <Link href={subItem.href ?? '/'}>{subItem.title}</Link>
+                              <Link href={subItem.slug}>{subItem.title}</Link>
                             </NavigationMenuLink>
                           </li>
                         ))}
                       </ul>
                     </NavigationMenuContent>
                   </>
-                ) : (
+                ) : item.slug ? (
                   <NavigationMenuLink
                     asChild
                     className={`${navigationMenuTriggerStyle()} bg-transparent! p-0 text-lg font-medium after:absolute after:-bottom-0.5 after:left-0 after:h-0.5 after:w-0 after:bg-[#393798] after:transition-all after:duration-300 hover:after:w-full`}
                   >
-                    <Link href={item.href ?? '/'}>{item.title}</Link>
+                    <Link href={item.slug}>{item.title}</Link>
                   </NavigationMenuLink>
-                )}
+                ) : null}
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
@@ -130,8 +97,8 @@ const Navbar = () => {
             <SheetTitle className="sr-only" />
             <SheetDescription className="sr-only" />
             <nav className="flex flex-col space-y-4">
-              {menuItems.map((item) => (
-                <MenuItemComponent key={item.title} item={item} setParentOpen={setOpen} />
+              {sortedMenuItems.map((item, idx) => (
+                <MenuItemComponent key={idx} item={item} setParentOpen={setOpen} />
               ))}
             </nav>
           </SheetContent>
@@ -150,16 +117,7 @@ interface MenuItemComponentProps {
 const MenuItemComponent = ({ item, depth = 0, setParentOpen }: MenuItemComponentProps) => {
   const [isOpen, setIsOpen] = useState(false)
 
-  // const router = useRouter()
-
-  // const handleNavigate = (href: string) => {
-  //   setParentOpen(false)
-  //   router.push(href)
-  // }
-
-  // const handleLinkClick = () => setParentOpen(false)
-
-  if (item.subMenu) {
+  if (item.subMenu && item.subMenu.length > 0) {
     return (
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
         <CollapsibleTrigger asChild>
@@ -174,41 +132,40 @@ const MenuItemComponent = ({ item, depth = 0, setParentOpen }: MenuItemComponent
           </button>
         </CollapsibleTrigger>
         <CollapsibleContent>
-          {item.subMenu.map((subItem) => (
-            <MenuItemComponent
-              key={subItem.title}
-              item={subItem}
-              depth={depth + 1}
-              setParentOpen={setParentOpen}
-            />
+          {item.subMenu.map((subItem, subIdx) => (
+            <a
+              key={subIdx}
+              href={subItem.slug}
+              className={cn(
+                'block py-2 text-base font-medium transition-colors hover:text-primary',
+                'pl-4'
+              )}
+              onClick={() => setParentOpen(false)}
+            >
+              {subItem.title}
+            </a>
           ))}
         </CollapsibleContent>
       </Collapsible>
     )
   }
 
-  return (
-    // <div
-    //   // href={item.href ?? '/'}
-    //   // onClick={() => handleNavigate(item.href ?? '/')}
-    //   className={cn('block py-2 text-lg font-medium', depth > 0 && 'pl-4 text-base')}
-    //   // onClick={handleLinkClick}
-    // >
-    //   <Link href={item.href ?? '/'} onClick={handleLinkClick} className="w-full">
-    //     {item.title}
-    //   </Link>
-    // </div>
-    <a
-      href={item.href}
-      className={cn(
-        'block py-2 text-lg font-medium transition-colors hover:text-primary',
-        depth > 0 && 'pl-4',
-        item.href === '/' && 'text-primary'
-      )}
-    >
-      {item.title}
-    </a>
-  )
+  if (item.slug) {
+    return (
+      <a
+        href={item.slug}
+        className={cn(
+          'block py-2 text-lg font-medium transition-colors hover:text-primary',
+          depth > 0 && 'pl-4'
+        )}
+        onClick={() => setParentOpen(false)}
+      >
+        {item.title}
+      </a>
+    )
+  }
+
+  return null
 }
 
 export default Navbar
