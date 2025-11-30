@@ -42,20 +42,20 @@ export default async function DynamicPageRoute({ params }: { params: Promise<{ s
 }
 
 // Generate metadata
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  const { slug } = await params
+// export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+//   const { slug } = await params
 
-  const { data: page } = (await sanityFetch({
-    query: dynamicPageBySlugQuery,
-    params: { slug },
-  })) as { data: DynamicPage | null }
+//   const { data: page } = (await sanityFetch({
+//     query: dynamicPageBySlugQuery,
+//     params: { slug },
+//   })) as { data: DynamicPage | null }
 
-  if (!page) {
-    return {}
-  }
+//   if (!page) {
+//     return {}
+//   }
 
-  return {
-    title: page.seo?.metaTitle || page.title,
-    description: page.seo?.metaDescription || page.aboutSection?.aboutText,
-  }
-}
+//   return {
+//     title: page.seo?.metaTitle || page.title,
+//     description: page.seo?.metaDescription || page.aboutSection?.aboutText,
+//   }
+// }

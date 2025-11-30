@@ -32,6 +32,7 @@ const clashDisplay = localFont({
     },
   ],
   variable: '--font-clash-display',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {

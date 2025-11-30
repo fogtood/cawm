@@ -9,8 +9,7 @@ export default defineType({
       name: 'title',
       title: 'Page Title',
       type: 'string',
-      initialValue: 'Events Page',
-      readOnly: true,
+      initialValue: 'Events',
     }),
 
     // Hero Section
