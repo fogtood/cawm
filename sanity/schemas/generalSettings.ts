@@ -65,6 +65,18 @@ export default defineType({
       type: 'url',
       description: 'Full URL to YouTube channel',
     }),
+    defineField({
+      name: 'tiktok',
+      title: 'TikTok URL',
+      type: 'url',
+      description: 'Full URL to TikTok profile',
+    }),
+    defineField({
+      name: 'spotify',
+      title: 'Spotify URL',
+      type: 'url',
+      description: 'Full URL to Spotify profile',
+    }),
     // Meta/SEO Global
     defineField({
       name: 'siteTitle',

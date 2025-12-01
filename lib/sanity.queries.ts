@@ -129,10 +129,12 @@ export const generalSettingsQuery = groq`*[_type == "generalSettings"][0] {
   email,
   phone,
   address,
-  facebook, 
+  facebook,
   instagram,
   twitter,
   youtube,
+  tiktok,
+  spotify,
   mapEmbedUrl,
   logo,
   favicon

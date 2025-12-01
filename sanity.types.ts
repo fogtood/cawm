@@ -112,10 +112,6 @@ export type DynamicPage = {
         _key: string
       }
   >
-  seo?: {
-    metaTitle?: string
-    metaDescription?: string
-  }
 }
 
 export type Navigation = {
@@ -165,6 +161,8 @@ export type GeneralSettings = {
   instagram?: string
   twitter?: string
   youtube?: string
+  tiktok?: string
+  spotify?: string
   siteTitle?: string
   siteDescription?: string
   favicon?: {
