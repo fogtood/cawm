@@ -89,7 +89,9 @@ const Footer = async () => {
           </div>
         </div>
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3 border-t border-[#5757564D] py-5 md:justify-between">
-          <p className="text-center text-sm">© 2025 {siteTitle}. All rights reserved.</p>
+          <p className="text-center text-sm">
+            © {new Date().getFullYear()} {siteTitle}. All rights reserved.
+          </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             {generalSettings?.instagram && (
               <a
