@@ -6,7 +6,7 @@ import Footer from '@/components/layout/footer'
 import AOSInit from '@/components/common/aos-init'
 import { SanityLive } from '@/sanity/live'
 import { sanityFetch } from '@/sanity/live'
-import { navigationQuery } from '@/lib/sanity.queries'
+import { generalSettingsQuery, navigationQuery } from '@/lib/sanity.queries'
 
 const clashDisplay = localFont({
   src: [
@@ -35,9 +35,21 @@ const clashDisplay = localFont({
   display: 'swap',
 })
 
-export const metadata: Metadata = {
-  title: 'Christ Apostolic World Ministries',
-  description: 'Official website of Christ Apostolic World Ministries (CAWM)',
+export async function generateMetadata(): Promise<Metadata> {
+  const { data: settings } = await sanityFetch({ query: generalSettingsQuery })
+
+  return {
+    title: {
+      default: settings?.siteTitle || 'Christ Apostolic World Ministries',
+      template: '%s | CAWM', // Page title | CAWM
+    },
+    description:
+      settings?.siteDescription || 'Official website of Christ Apostolic World Ministries (CAWM)',
+    keywords: settings?.seo?.keywords || [],
+    authors: [{ name: 'Christ Apostolic World Ministries' }],
+    creator: 'Christ Apostolic World Ministries',
+    publisher: 'Christ Apostolic World Ministries',
+  }
 }
 
 export default async function RootLayout({
