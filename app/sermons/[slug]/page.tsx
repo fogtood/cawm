@@ -7,6 +7,7 @@ import { Sermon } from '@/sanity.types'
 import { sanityFetch } from '@/sanity/live'
 import Image from 'next/image'
 import Link from 'next/link'
+import { PortableText } from '@portabletext/react'
 
 export default async function SermonDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -32,14 +33,14 @@ export default async function SermonDetail({ params }: { params: Promise<{ slug:
           {sermon.title}
         </h1>
 
-        <p
-          className="my-4 text-base leading-7 text-[#575756] md:text-lg md:leading-9"
+        <div
+          className="prose prose-lg my-4 max-w-none text-base leading-7 text-[#575756] md:text-lg md:leading-9"
           data-aos="fade-up"
           data-aos-delay="100"
           data-aos-duration="800"
         >
-          {sermon.description}
-        </p>
+          {sermon.description && <PortableText value={sermon.description} />}
+        </div>
 
         <div
           className="text-center"

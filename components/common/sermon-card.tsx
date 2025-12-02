@@ -3,9 +3,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/lib/sanity.image'
 import { extractDateAndTime } from '@/lib/utils'
-import { Sermon } from '@/sanity.types'
+import type { Sermon } from '@/sanity.types'
 
-const SermonCard = ({ title, slug, preacher, dateTime, description, image }: Sermon) => {
+const SermonCard = ({ title, slug, preacher, dateTime, image, shortPreview }: Sermon) => {
   const imageUrl = image ? urlFor(image).url() : '/images/sermon.png'
 
   const { date, time } = extractDateAndTime(dateTime)
@@ -25,7 +25,7 @@ const SermonCard = ({ title, slug, preacher, dateTime, description, image }: Ser
         </div>
         <div className="px-4 py-6 text-sm text-[#1A1A1A]">
           <h3 className="text-lg font-semibold">{title}</h3>
-          {description && <p className="my-4 line-clamp-3">{description}</p>}
+          {shortPreview && <p className="my-4 line-clamp-3">{shortPreview}</p>}
           {preacher && (
             <p className="mb-2 flex items-center gap-2">
               <UserIcon size={18} /> {preacher}

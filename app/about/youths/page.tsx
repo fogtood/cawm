@@ -5,6 +5,7 @@ import LeaderCard from '@/components/common/leader-card'
 import { aboutYouthsPageQuery } from '@/lib/sanity.queries'
 import { AboutYouthsPage } from '@/sanity.types'
 import { sanityFetch } from '@/sanity/live'
+import { PortableText } from '@portabletext/react'
 
 export default async function AboutYouths() {
   const { data: aboutYouthPage } = (await sanityFetch({ query: aboutYouthsPageQuery })) as {
@@ -30,27 +31,32 @@ export default async function AboutYouths() {
         <h1 className="text-2xl font-semibold" data-aos="fade-up" data-aos-duration="800">
           {aboutYouthPage?.aboutSection?.title || 'About CAWM'}
         </h1>
-        <p
+        <div
           className="my-4 text-base leading-7 text-[#575756] md:text-lg md:leading-9"
           data-aos="fade-up"
           data-aos-delay="100"
           data-aos-duration="800"
         >
-          {aboutYouthPage?.aboutSection?.aboutText}
-        </p>
+          {aboutYouthPage?.aboutSection?.aboutText && (
+            <PortableText value={aboutYouthPage.aboutSection.aboutText} />
+          )}
+        </div>
 
         <div className="my-20">
           <h1 className="text-2xl font-semibold" data-aos="fade-up" data-aos-duration="800">
             {aboutYouthPage?.leadershipSection?.title || 'Our Leadership'}
           </h1>
-          <p
-            className="mt-4 text-base leading-7 text-[#575756] md:text-lg md:leading-9"
-            data-aos="fade-up"
-            data-aos-delay="100"
-            data-aos-duration="800"
-          >
-            {aboutYouthPage?.leadershipSection?.description}
-          </p>
+
+          {aboutYouthPage?.leadershipSection?.description && (
+            <p
+              className="prose prose-lg mt-4 max-w-none text-base leading-7 text-[#575756] md:text-lg md:leading-9"
+              data-aos="fade-up"
+              data-aos-delay="100"
+              data-aos-duration="800"
+            >
+              {aboutYouthPage.leadershipSection.description}
+            </p>
+          )}
 
           <div className="my-12 grid grid-cols-1 place-items-center gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {aboutYouthPage?.leadershipSection?.leadership &&

@@ -6,6 +6,7 @@ import { Event } from '@/sanity.types'
 import { sanityFetch } from '@/sanity/live'
 import { Calendar, Clock, MapPin } from 'lucide-react'
 import Link from 'next/link'
+import { PortableText } from '@portabletext/react'
 
 export default async function EventDetails({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -56,14 +57,14 @@ export default async function EventDetails({ params }: { params: Promise<{ slug:
           </p>
         </div>
 
-        <p
-          className="my-8 text-base leading-7 text-[#575756] md:text-lg md:leading-9"
+        <div
+          className="prose prose-lg my-8 max-w-none text-base leading-7 text-[#575756] md:text-lg md:leading-9"
           data-aos="fade-up"
           data-aos-delay="200"
           data-aos-duration="800"
         >
-          {event.description}
-        </p>
+          {event.description && <PortableText value={event.description} />}
+        </div>
       </div>
     </div>
   )

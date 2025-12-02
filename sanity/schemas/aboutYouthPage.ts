@@ -54,10 +54,9 @@ export default defineType({
         defineField({
           name: 'aboutText',
           title: 'About Text',
-          type: 'text',
-          // type: 'array',
-          // of: [{ type: 'block' }],
-          // description: 'Full about description text section',
+          type: 'array',
+          of: [{ type: 'block' }],
+          description: 'Full about description text section',
         }),
       ],
     }),

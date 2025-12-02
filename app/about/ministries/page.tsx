@@ -5,6 +5,7 @@ import LeaderCard from '@/components/common/leader-card'
 import { aboutMinistriesPageQuery } from '@/lib/sanity.queries'
 import { AboutMinistriesPage } from '@/sanity.types'
 import { sanityFetch } from '@/sanity/live'
+import { PortableText } from '@portabletext/react'
 
 export default async function AboutMinistries() {
   const { data: aboutMinistriesPage } = (await sanityFetch({
@@ -32,21 +33,23 @@ export default async function AboutMinistries() {
         <h1 className="text-2xl font-semibold" data-aos="fade-up" data-aos-duration="800">
           {aboutMinistriesPage?.aboutSection?.title || 'About CAWM Ministries'}
         </h1>
-        <p
+        <div
           className="my-4 text-base leading-7 text-[#575756] md:text-lg md:leading-9"
           data-aos="fade-up"
           data-aos-delay="100"
           data-aos-duration="800"
         >
-          {aboutMinistriesPage?.aboutSection?.aboutText}
-        </p>
+          {aboutMinistriesPage?.aboutSection?.aboutText && (
+            <PortableText value={aboutMinistriesPage.aboutSection.aboutText} />
+          )}
+        </div>
 
         <div className="my-20">
           <h1 className="text-2xl font-semibold" data-aos="fade-up" data-aos-duration="800">
             Our Leadership
           </h1>
           <p
-            className="mt-4 text-base leading-7 text-[#575756] md:text-lg md:leading-9"
+            className="prose prose-lg mt-4 max-w-none text-base leading-7 text-[#575756] md:text-lg md:leading-9"
             data-aos="fade-up"
             data-aos-delay="100"
             data-aos-duration="800"

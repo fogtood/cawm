@@ -24,7 +24,14 @@ export default defineType({
     defineField({
       name: 'description',
       title: 'Description',
-      type: 'text',
+      type: 'array',
+      of: [{ type: 'block' }],
+    }),
+    defineField({
+      name: 'shortPreview',
+      title: 'Short Preview',
+      type: 'string',
+      description: 'Short plain-text preview used in cards and lists',
     }),
     defineField({
       name: 'image',
@@ -79,4 +86,3 @@ export default defineType({
     },
   },
 })
-

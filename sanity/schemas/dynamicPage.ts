@@ -75,7 +75,8 @@ export default defineType({
         defineField({
           name: 'aboutText',
           title: 'About Text',
-          type: 'text',
+          type: 'array',
+          of: [{ type: 'block' }],
         }),
       ],
     }),
@@ -149,22 +150,6 @@ export default defineType({
       of: [{ type: 'image' }],
       options: { layout: 'grid' },
       hidden: ({ parent }) => !['ministry', 'youth'].includes(parent?.template),
-    }),
-    // Additional Content Blocks (for basic template)
-    defineField({
-      name: 'contentBlocks',
-      title: 'Content Blocks',
-      type: 'array',
-      hidden: ({ parent }) => parent?.template !== 'basic',
-      of: [
-        {
-          type: 'block',
-        },
-        {
-          type: 'image',
-          options: { hotspot: true },
-        },
-      ],
     }),
   ],
   preview: {
