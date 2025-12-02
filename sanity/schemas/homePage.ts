@@ -26,7 +26,7 @@ export default defineType({
         defineField({
           name: 'subtitle',
           title: 'Hero Subtitle',
-          type: 'text',
+          type: 'string',
         }),
         defineField({
           name: 'backgroundImage',
@@ -127,7 +127,7 @@ export default defineType({
         defineField({
           name: 'description',
           title: 'Section Description',
-          type: 'text',
+          type: 'string',
         }),
         defineField({
           name: 'buttonText',
@@ -155,7 +155,7 @@ export default defineType({
         defineField({
           name: 'description',
           title: 'Section Description',
-          type: 'text',
+          type: 'string',
         }),
       ],
     }),
@@ -173,7 +173,7 @@ export default defineType({
         defineField({
           name: 'description',
           title: 'Section Description',
-          type: 'text',
+          type: 'string',
         }),
         defineField({
           name: 'youtubeVideoId',
@@ -198,7 +198,7 @@ export default defineType({
         defineField({
           name: 'description',
           title: 'Section Description',
-          type: 'text',
+          type: 'string',
         }),
         defineField({
           name: 'buttonText',
@@ -226,7 +226,7 @@ export default defineType({
         defineField({
           name: 'description',
           title: 'Section Description',
-          type: 'text',
+          type: 'string',
         }),
       ],
     }),
