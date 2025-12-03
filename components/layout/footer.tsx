@@ -31,7 +31,7 @@ const Footer = async () => {
         <div className="grid grid-cols-1 gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
           <div className="col-span-1 space-y-3.5">
             <Brand />
-            <h4 className="text-lg font-medium text-white">{siteTitle}</h4>
+            <h1 className="text-lg font-medium text-white">{siteTitle}</h1>
             <ul className="space-y-5 text-sm">
               <li className="flex items-center gap-3">
                 <MapPin size={18} className="flex-none" /> <span>{address}</span>
@@ -46,7 +46,7 @@ const Footer = async () => {
           </div>
 
           <div className="col-span-1 space-y-3.5">
-            <h4 className="text-lg font-medium text-white">Quick Links</h4>
+            <h1 className="text-lg font-medium text-white">Quick Links</h1>
             <ul className="space-y-5 text-sm">
               <li>
                 <Link href="/">Home</Link>
@@ -64,7 +64,7 @@ const Footer = async () => {
           </div>
 
           <div className="col-span-1 space-y-3.5">
-            <h4 className="text-lg font-medium text-white">Service Times</h4>
+            <h1 className="text-lg font-medium text-white">Service Times</h1>
             <ul className="space-y-5 text-sm">
               {services && services.length > 0 ? (
                 services.map((service) => (
@@ -83,7 +83,7 @@ const Footer = async () => {
           </div>
 
           <div className="col-span-1 space-y-3.5">
-            <h4 className="text-lg font-medium text-white">Stay Connected</h4>
+            <h1 className="text-lg font-medium text-white">Stay Connected</h1>
             <p className="text-sm">Subscribe to our newsletter for updates and inspiration.</p>
             <FooterForm />
           </div>

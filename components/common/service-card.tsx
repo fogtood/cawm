@@ -15,12 +15,12 @@ const ServiceCard = ({ title, location, image, schedule }: Service) => {
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 400px"
-          priority
+          loading="lazy"
         />
       </div>
 
       <div className="bg-[#161C2D] p-6 text-[#FFFFFF]">
-        <h3 className="mb-5 text-lg font-semibold">{title}</h3>
+        <h1 className="mb-5 text-lg font-semibold">{title}</h1>
 
         {schedule?.time && (
           <div className="mb-3 flex items-center gap-2 text-sm">

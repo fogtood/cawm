@@ -23,7 +23,8 @@ const Bg = ({
         src={background || '/images/hero.png'}
         alt="Background"
         fill
-        priority
+        fetchPriority="high"
+        loading="eager"
         className="object-cover"
       />
 

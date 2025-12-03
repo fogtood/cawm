@@ -50,6 +50,7 @@ const TestimonialCarousel = ({ testimonials }: { testimonials: Testimonial[] }) 
                         alt={item.name || 'testimonial image'}
                         fill
                         className="object-cover"
+                        loading="lazy"
                       />
                     </div>
 

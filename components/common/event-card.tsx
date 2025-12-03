@@ -16,11 +16,11 @@ const EventCard = ({ title, slug, image, shortPreview }: Event) => {
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 400px"
-          priority
+          loading="lazy"
         />
       </div>
       <div className="py-6 text-sm text-[#161C2D]">
-        <h3 className="text-lg font-semibold">{title}</h3>
+        <h1 className="text-lg font-semibold">{title}</h1>
         {shortPreview && <p className="my-2 line-clamp-3">{shortPreview}</p>}
         <Button variant="link" className="px-0 text-[#161C2D]" asChild>
           <Link href={`/events/${slug?.current}`}>Learn More</Link>

@@ -20,11 +20,11 @@ const SermonCard = ({ title, slug, preacher, dateTime, image, shortPreview }: Se
             fill
             className="object-cover"
             sizes="(max-width: 768px) 100vw, 400px"
-            priority
+            loading="lazy"
           />
         </div>
         <div className="px-4 py-6 text-sm text-[#1A1A1A]">
-          <h3 className="text-lg font-semibold">{title}</h3>
+          <h1 className="text-lg font-semibold">{title}</h1>
           {shortPreview && <p className="my-4 line-clamp-3">{shortPreview}</p>}
           {preacher && (
             <p className="mb-2 flex items-center gap-2">

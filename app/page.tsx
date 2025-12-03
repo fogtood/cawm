@@ -60,11 +60,12 @@ export default async function Home() {
               .url()}
             alt="Background"
             fill
-            priority
+            fetchPriority="high"
+            loading="eager"
             className="object-cover"
           />
         ) : (
-          <Image src="/images/hero.png" alt="Background" fill priority className="object-cover" />
+          <Image src="/images/hero.png" alt="Background" fill fetchPriority="high" loading="eager" className="object-cover" />
         )}
 
         {/* Gradient overlays */}
@@ -316,7 +317,7 @@ export default async function Home() {
         <div>
           <div className="text-center" data-aos="fade-up" data-aos-duration="800">
             {homePage?.liveProgram?.title && (
-              <h3 className="text-2xl font-semibold text-[#212120]">
+              <h1 className="text-2xl font-semibold text-[#212120]">
                 {homePage.liveProgram.title}
                 <span>
                   <Image
@@ -325,9 +326,9 @@ export default async function Home() {
                     width={24}
                     height={24}
                     className="ml-2 inline-block"
-                  />
+                  />                  gh auth status
                 </span>
-              </h3>
+              </h1>
             )}
             {homePage?.liveProgram?.description && (
               <p className="mt-1 text-[#575756]">{homePage.liveProgram.description}</p>
