@@ -23,7 +23,7 @@ const EventCard = ({ title, slug, image, shortPreview }: Event) => {
         <h1 className="text-lg font-semibold">{title}</h1>
         {shortPreview && <p className="my-2 line-clamp-3">{shortPreview}</p>}
         <Button variant="link" className="px-0 text-[#161C2D]" asChild>
-          <Link href={`/events/${slug?.current}`}>Learn More</Link>
+          <Link href={`/events/${slug?.current}`}>Know More</Link>
         </Button>
       </div>
     </div>
