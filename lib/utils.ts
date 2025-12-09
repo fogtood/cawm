@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
+import type { PortableTextBlock, PortableTextSpan } from '@portabletext/types'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -22,4 +23,16 @@ export function extractDateAndTime(dateTimeStr?: string): { date: string; time: 
     minute: '2-digit',
   })
   return { date, time }
+}
+
+export function toPlainText(blocks: PortableTextBlock[] = []): string {
+  return blocks
+    .map((block) => {
+      if (block._type !== 'block' || !Array.isArray(block.children)) {
+        return ''
+      }
+
+      return block.children.map((child) => (child as PortableTextSpan).text || '').join('')
+    })
+    .join('\n\n')
 }
