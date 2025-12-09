@@ -40,15 +40,16 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     title: {
-      default: settings?.siteTitle || 'Christ Apostolic World Ministries',
-      template: '%s | CAWM', // Page title | CAWM
+      default: settings?.siteTitle || 'Christ Apostolic World Revival Ministry',
+      template: '%s | CAWRM', // Page title | CAWRM
     },
     description:
-      settings?.siteDescription || 'Official website of Christ Apostolic World Ministries (CAWM)',
+      settings?.siteDescription ||
+      'Official website of Christ Apostolic World Revival Ministry (CAWRM)',
     keywords: settings?.seo?.keywords || [],
-    authors: [{ name: 'Christ Apostolic World Ministries' }],
-    creator: 'Christ Apostolic World Ministries',
-    publisher: 'Christ Apostolic World Ministries',
+    authors: [{ name: 'Christ Apostolic World Revival Ministry' }],
+    creator: 'Christ Apostolic World Revival Ministry',
+    publisher: 'Christ Apostolic World Revival Ministry',
   }
 }
 
