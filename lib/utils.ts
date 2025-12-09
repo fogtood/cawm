@@ -25,14 +25,28 @@ export function extractDateAndTime(dateTimeStr?: string): { date: string; time: 
   return { date, time }
 }
 
-export function toPlainText(blocks: PortableTextBlock[] = []): string {
+export function toPlainText(blocks: unknown = []): string {
+  if (!Array.isArray(blocks)) return ''
+
   return blocks
     .map((block) => {
-      if (block._type !== 'block' || !Array.isArray(block.children)) {
+      if (
+        !block ||
+        typeof block !== 'object' ||
+        (block as any)._type !== 'block' ||
+        !Array.isArray((block as any).children)
+      ) {
         return ''
       }
 
-      return block.children.map((child) => (child as PortableTextSpan).text || '').join('')
+      return (block as any).children
+        .map((child: unknown) => {
+          if (child && typeof child === 'object' && typeof (child as any).text === 'string') {
+            return (child as any).text
+          }
+          return ''
+        })
+        .join('')
     })
     .join('\n\n')
 }
