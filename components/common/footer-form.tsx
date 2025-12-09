@@ -6,7 +6,7 @@ import { Button } from '../ui/button'
 import { useEffect, useRef } from 'react'
 
 const FooterForm = () => {
-  const [state, handleSubmit] = useForm('xwpdobzv')
+  const [state, handleSubmit] = useForm('xkgdvdwb')
   const formRef = useRef<HTMLFormElement>(null)
   const wasSubmittingRef = useRef(false)
 
