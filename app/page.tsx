@@ -326,7 +326,7 @@ export default async function Home() {
                     width={24}
                     height={24}
                     className="ml-2 inline-block"
-                  />                  gh auth status
+                  />
                 </span>
               </h1>
             )}
