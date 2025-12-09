@@ -8,7 +8,7 @@ import { toPlainText } from '@/lib/utils'
 
 const EventCard = ({ title, slug, image, description, shortPreview }: Event) => {
   const imageUrl = image ? urlFor(image).url() : '/images/event.png'
-  const previewText = toPlainText(description as unknown as PortableTextBlock[]) || shortPreview
+  const previewText = toPlainText(description) || shortPreview
 
   return (
     <div className="w-full max-w-sm">

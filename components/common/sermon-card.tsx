@@ -16,7 +16,7 @@ const SermonCard = ({
   shortPreview,
 }: Sermon) => {
   const imageUrl = image ? urlFor(image).url() : '/images/sermon.png'
-  const previewText = toPlainText(description as unknown as PortableTextBlock[]) || shortPreview
+  const previewText = toPlainText(description) || shortPreview
   const { date, time } = extractDateAndTime(dateTime)
 
   return (
