@@ -37,23 +37,6 @@ export default defineType({
           },
         }),
         defineField({
-          name: 'primaryButton',
-          title: 'Primary Button',
-          type: 'object',
-          fields: [
-            {
-              name: 'text',
-              title: 'Button Text',
-              type: 'string',
-            },
-            {
-              name: 'link',
-              title: 'Button Link',
-              type: 'string',
-            },
-          ],
-        }),
-        defineField({
           name: 'secondaryButton',
           title: 'Secondary Button',
           type: 'object',

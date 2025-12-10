@@ -152,7 +152,6 @@ export const HOME_QUERY = groq`*[_type == "homePage"][0] {
     title,
     subtitle,
     backgroundImage,
-    primaryButton { text, link },
     secondaryButton { text, link }
   },
   welcome { heading, title, description, image, buttonText, buttonLink },

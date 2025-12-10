@@ -5,13 +5,13 @@ import ServiceCard from '@/components/common/service-card'
 import TestimonialCarousel from '@/components/common/testimonial-carousel'
 import YoutubeEmbed from '@/components/common/youtube-embed'
 import { Button } from '@/components/ui/button'
-import { PlayIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/lib/sanity.image'
 import { sanityFetch } from '@/sanity/live'
 import { HOME_QUERY } from '@/lib/sanity.queries'
 import { Event, HomePage, Sermon, Service, Testimonial, Values } from '@/sanity.types'
+import AppButton from '@/components/common/app-button'
 
 export default async function Home() {
   const result = (await sanityFetch({ query: HOME_QUERY })) as {
@@ -93,27 +93,7 @@ export default async function Home() {
             data-aos-delay="200"
             data-aos-duration="1000"
           >
-            {homePage?.hero?.primaryButton?.text &&
-              (homePage.hero.primaryButton.link ? (
-                <Button
-                  size="icon"
-                  className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-2 text-base font-normal sm:px-8 sm:py-3 sm:text-lg md:px-10 md:py-4 md:text-xl"
-                  asChild
-                >
-                  <Link href={homePage.hero.primaryButton.link}>
-                    <PlayIcon fill="white" />
-                    {homePage.hero.primaryButton.text}
-                  </Link>
-                </Button>
-              ) : (
-                <Button
-                  size="icon"
-                  className="h-auto w-auto cursor-pointer rounded-sm bg-linear-to-r from-[#393798] to-[#131232] px-6 py-2 text-base font-normal sm:px-8 sm:py-3 sm:text-lg md:px-10 md:py-4 md:text-xl"
-                >
-                  <PlayIcon fill="white" />
-                  {homePage.hero.primaryButton.text}
-                </Button>
-              ))}
+            <AppButton />
             {homePage?.hero?.secondaryButton?.text &&
               (homePage.hero.secondaryButton.link ? (
                 <Button
@@ -312,7 +292,7 @@ export default async function Home() {
         </div>
       </div>
 
-      <section className="container mx-auto my-20 px-4 md:px-6">
+      <section id="watch-live" className="container mx-auto my-20 px-4 md:px-6">
         {/* Live program section */}
         <div>
           <div className="text-center" data-aos="fade-up" data-aos-duration="800">
