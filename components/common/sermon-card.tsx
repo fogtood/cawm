@@ -4,7 +4,6 @@ import Link from 'next/link'
 import { urlFor } from '@/lib/sanity.image'
 import { extractDateAndTime, toPlainText } from '@/lib/utils'
 import type { Sermon } from '@/sanity.types'
-import type { PortableTextBlock } from '@portabletext/types'
 
 const SermonCard = ({
   title,
@@ -16,7 +15,7 @@ const SermonCard = ({
   shortPreview,
 }: Sermon) => {
   const imageUrl = image ? urlFor(image).url() : '/images/sermon.png'
-  const previewText = toPlainText(description) || shortPreview
+  const previewText = toPlainText(description) ?? shortPreview
   const { date, time } = extractDateAndTime(dateTime)
 
   return (
@@ -34,7 +33,7 @@ const SermonCard = ({
         </div>
         <div className="px-4 py-6 text-sm text-[#1A1A1A]">
           <h1 className="text-lg font-semibold">{title}</h1>
-          {shortPreview && <p className="my-4 line-clamp-3">{previewText}</p>}
+          {previewText && <p className="my-4 line-clamp-3">{previewText}</p>}
           {preacher && (
             <p className="mb-2 flex items-center gap-2">
               <UserIcon size={18} /> {preacher}
