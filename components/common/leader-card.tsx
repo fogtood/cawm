@@ -22,7 +22,7 @@ const LeaderCard = ({ leader, index }: { leader: Leader; index?: number }) => {
         alt={leader?.name || 'Leader'}
         width={320}
         height={320}
-        className="overflow-hidden rounded-2xl object-contain"
+        className="overflow-hidden rounded-2xl object-contain w-auto h-80"
       />
       <div className="text-center">
         <h3 className="text-lg font-semibold text-[#4A4A4A]">{leader?.name || 'Leader Name'}</h3>

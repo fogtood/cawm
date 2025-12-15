@@ -19,7 +19,8 @@ export default defineType({
     defineField({
       name: 'address',
       title: 'Address',
-      type: 'string',
+      type: 'array',
+      of: [{ type: 'block' }],
       description: 'The postal address, as it should appear on site',
     }),
     defineField({
@@ -104,9 +105,9 @@ export default defineType({
       title: 'siteTitle',
       address: 'address',
     },
-    prepare(selection) {
+    prepare() {
       return {
-        title: selection.title || selection.address || 'General Settings',
+        title: 'General Settings',
       }
     },
   },

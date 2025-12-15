@@ -6,6 +6,7 @@ import FooterForm from '../common/footer-form'
 import { client } from '@/lib/sanity.client'
 import { generalSettingsQuery, servicesQuery } from '@/lib/sanity.queries'
 import type { GeneralSettings, Service } from '@/sanity.types'
+import { PortableText } from '@portabletext/react'
 
 const Footer = async () => {
   let generalSettings: GeneralSettings | null = null
@@ -22,8 +23,8 @@ const Footer = async () => {
 
   const email = generalSettings?.email || 'info@example.com'
   const phone = generalSettings?.phone || '+123 456 7890'
-  const address = generalSettings?.address || '123 Main St, City, Country'
-  const siteTitle = generalSettings?.siteTitle || 'Christ Apostolic World Ministry'
+  const address = generalSettings?.address
+  const siteTitle = generalSettings?.siteTitle || 'Christ Apostolic World Revival Ministry'
 
   return (
     <footer className="bg-[#101010] pt-16 text-[#DADADACC] md:pt-20">
@@ -34,7 +35,12 @@ const Footer = async () => {
             <h1 className="text-lg font-medium text-white">{siteTitle}</h1>
             <ul className="space-y-5 text-sm">
               <li className="flex items-center gap-3">
-                <MapPin size={18} className="flex-none" /> <span>{address}</span>
+                <MapPin size={18} className="flex-none" />
+                {address ? (
+                  <PortableText value={address} />
+                ) : (
+                  <span>123 Main St, City, Country</span>
+                )}
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={18} className="flex-none" /> <span>{phone}</span>

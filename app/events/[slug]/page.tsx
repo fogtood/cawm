@@ -7,6 +7,7 @@ import { sanityFetch } from '@/sanity/live'
 import { Calendar, Clock, MapPin } from 'lucide-react'
 import Link from 'next/link'
 import { PortableText } from '@portabletext/react'
+import { urlFor } from '@/lib/sanity.image'
 
 export default async function EventDetails({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
@@ -15,12 +16,14 @@ export default async function EventDetails({ params }: { params: Promise<{ slug:
     data: Event
   }
   const { date, time } = extractDateAndTime(event.date)
+  const imageUrl = event.image ? urlFor(event.image).url() : '/images/sermon.png'
 
   return (
     <div>
       <Bg
         title="Events"
         subtitle="Join us for our upcoming events and experience community like never before"
+        background={imageUrl}
       />
 
       <div className="container mx-auto my-20 px-4 md:px-6">
