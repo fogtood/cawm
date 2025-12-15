@@ -35,10 +35,7 @@ export default async function Contact() {
             <div className="mt-5 space-y-8">
               <ContactInfo
                 title="Address"
-                subtitle={
-                  generalSettings?.address ||
-                  'Block 115 T.F. Kuboye Road By The Podium Event Centre Marwa Bus Stop, Lekki Phase One, Lagos'
-                }
+                subtitle={generalSettings?.address || ''}
                 icon={<MapPin />}
               />
               <ContactInfo
