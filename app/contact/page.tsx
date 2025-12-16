@@ -35,17 +35,17 @@ export default async function Contact() {
             <div className="mt-5 space-y-8">
               <ContactInfo
                 title="Address"
-                subtitle={generalSettings?.address || ''}
+                subtitle={generalSettings?.address}
                 icon={<MapPin />}
               />
               <ContactInfo
                 title="Phone"
-                subtitle={generalSettings?.phone || '+234 803 123 4567'}
+                subtitle={generalSettings?.phone}
                 icon={<Phone />}
               />
               <ContactInfo
                 title="Email"
-                subtitle={generalSettings?.email || 'info@example.com'}
+                subtitle={generalSettings?.email}
                 icon={<Mail />}
               />
             </div>
