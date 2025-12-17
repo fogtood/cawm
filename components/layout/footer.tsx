@@ -36,11 +36,13 @@ const Footer = async () => {
             <ul className="space-y-5 text-sm">
               <li className="flex items-center gap-3">
                 <MapPin size={18} className="flex-none" />
-                {address ? (
-                  <><PortableText value={address} /></>
-                ) : (
-                  <span>123 Main St, City, Country</span>
-                )}
+                <div>
+                  {address ? (
+                    <PortableText value={address} />
+                  ) : (
+                    <span>123 Main St, City, Country</span>
+                  )}
+                </div>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={18} className="flex-none" /> <span>{phone}</span>
