@@ -37,7 +37,7 @@ const Footer = async () => {
               <li className="flex items-center gap-3">
                 <MapPin size={18} className="flex-none" />
                 {address ? (
-                  <PortableText value={address} />
+                  <><PortableText value={address} /></>
                 ) : (
                   <span>123 Main St, City, Country</span>
                 )}
